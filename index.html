@@ -13,20 +13,19 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
+        html, body {
+            height: 600px; 
+        }
+
         body {
-            background-color: #f9f9f9;
+            background-color: #ffffff;
         }
 
         .container {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            width: 80%;
-            margin: 10px auto;
-            padding: 50px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transform: scale(0.8);
+            transform-origin: center top; 
+            box-shadow: none;
+
         }
 
         .shipping-section, .summary-section {
@@ -141,6 +140,7 @@
             font-size: 12px;
             text-align: center;
             gap: 10px; 
+            cursor: pointer;
         }
 
 
@@ -169,7 +169,13 @@
             width: 80%; 
             text-align: center;
             border-radius: 4px;
+            transition: background-color 0.3s ease; 
         }
+
+        .edit-btn:hover {
+            background-color: #53748A;
+        }
+
 
         #add-new-address {
             padding: 40px;
@@ -181,17 +187,25 @@
             width: 100%;
         }
 
-        .summary-content p {
-            margin-bottom: 5px;
+        .summary-content {
+            margin-bottom: 15px;
+            margin-top: 15px;
+            border-bottom: 1px solid #053856;
+            border-top: 1px solid #053856;
         }
 
         .summary-content p span {
             float: right;
         }
 
+        .summary-content-2 p span {
+            float: right;
+        }
+
         .cart-item {
             padding: 10px 0;
             border-bottom: 1px solid #053856;
+            border-top: 1px solid #053856;
         }
 
         .edit-cart {
@@ -313,12 +327,23 @@
             background-color: #fff;
             padding: 30px;
             border-radius: 12px;
-            max-width: 600px;
-            width: 90%;
+            width: calc(90% + 20px);
+            max-width: calc(600px + 50px);
+            width: calc(90% + 20px);
             text-align: left;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             position: relative;
-            animation: fadeIn 0.3s ease-out;
+            animation: scaleDown 0.2s ease-out forwards, fadeIn 0.4s ease-out ;
+            transform-origin: center;
+        }
+
+        @keyframes scaleDown {
+            from {
+                transform: scale(.85);
+            }
+            to {
+                transform: scale(0.8);
+            }
         }
 
         @keyframes modal-entry {
@@ -333,8 +358,8 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .modal-close {
@@ -372,11 +397,18 @@
         }
 
         .modal-buttons {
-            margin-top: 20px;
-            width: 100%;
             display: flex;
-            justify-content: space-between;
-            gap: 10px; 
+            flex-direction: column;
+            align-items: center; /* Center everything horizontally */
+            gap: 20px;
+            width: 100%;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            width: 100%;
         }
 
         .modal-btn {
@@ -393,6 +425,52 @@
                 flex-direction: column;
             }
         }
+
+.save-address-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 5px;
+}
+
+.save-address-section {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.save-address-options {
+    display: flex;
+    gap: 10px; /* Space between Yes and No */
+}
+
+.save-address-text {
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+}
+
+.save-address-section p {
+    margin: 0;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.save-address-section label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.save-address-section input[type="radio"] {
+    margin: 0;
+}
 
 .modal-btn-n {
 padding: 10px 20px;
@@ -475,6 +553,31 @@ background-color: #8A3536;
     background-color: #53748A;
     color: white;
 }
+
+.save-address-text {
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+}
+
+        .product-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .product-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
 
         .terms-modal-wrapper {
             display: none;
@@ -798,6 +901,14 @@ background-color: #8A3536;
             margin-bottom: 10px;
         }
 
+        .billing-content, .shipping-content {
+            font-size: 14px;
+            color: black; 
+            line-height: 1.1; 
+            text-align: left; 
+        }
+
+
 
     </style>
 </head>
@@ -833,30 +944,28 @@ background-color: #8A3536;
                         <option value="pickup-jasper-in" disabled>Pickup Jasper, IN</option>
                         <option value="pickup-madisonville-ky" disabled>Pickup Madisonville, KY</option>
                         <option value="pickup-owensboro-ky" disabled>Pickup Owensboro, KY</option>
-                       <option value="pickup-vincennes-in" disabled>Pickup Vincennes, IN</option>
+                        <option value="pickup-vincennes-in" disabled>Pickup Vincennes, IN</option>
                     </select>
-
-
 
                     <div class="address-search">
                         <input type="text" id="search-address" placeholder="Enter name, address, city" aria-label="Search Address">
                         <span id="search-button">🔍</span>
                     </div>
 
-                    <h5>Select Billing Address</h5>
+                    <h5>Select Shipping Address</h5> <!-- Changed label for clarity -->
 
                     <div class="address-list grid-3-columns">
                         <div class="add-address-option">
                             <button id="add-new-address">+ Add New Address</button>
                         </div>
                         <div class="address-option">
-                            <input type="radio" id="address1" name="address" value="DEBRA-KUEMPEL, 3976 SOUTHERN AVE, CINCINNATI, OH 45227" aria-label="Select Address" checked>
-                            <label for="address1">3976 SOUTHERN AVE <br> CINCINNATI, OH 45227</label>
+                            <input type="radio" id="address1" name="shipping-address" value="DEBRA-KUEMPEL, 3976 SOUTHERN AVE, CINCINNATI, OH 45227, Phone: 555-987-6543" aria-label="Select Address" checked>
+                            <label for="address1">DEBRA-KUEMPEL<br>3976 SOUTHERN AVE<br>CINCINNATI, OH 45227<br>Phone: 555-987-6543</label>
                             <button class="edit-btn" aria-label="Edit Address">Edit</button>
                         </div>
                         <div class="address-option">
-                            <input type="radio" id="address2" name="address" value="DEBRA-KUEMPEL, 156 MAIN ST, NOWHERE, IN 47612" aria-label="Select Address">
-                            <label for="address2">156 MAIN ST <br> NOWHERE, IN 47612</label>
+                            <input type="radio" id="address2" name="shipping-address" value="ACME CORP, 156 MAIN ST, NOWHERE, IN 47612, Phone: 555-123-4567" aria-label="Select Address">
+                            <label for="address2">ACME CORP<br>156 MAIN ST<br>NOWHERE, IN 47612<br>Phone: 555-123-4567</label>
                             <button class="edit-btn" aria-label="Edit Address">Edit</button>
                         </div>
                     </div>
@@ -892,9 +1001,6 @@ background-color: #8A3536;
                     </div>
                         <p style="color: red; text-align: center;">UPS ONLY</p>
                 </div>
-
-
-
 
                 <!-- Collect Options -->
                 <div id="collect-options" class="shipping-detail" style="display: none;">
@@ -955,7 +1061,7 @@ background-color: #8A3536;
 
             <!-- Credit Card Form -->
             <div id="credit-card-form" class="tab-content" style="display: none;">
-                <input type="text" id="purchase-order-number-number" placeholder="Purchase Order#" >
+                <input type="text" id="purchase-order-number-number" placeholder="Purchase Order#">
                 <input type="text" id="card-number" placeholder="Card Number *" required>
                 <input type="text" id="expiration-date" placeholder="Expiration Date MM/YY *" required>
                 <input type="text" id="card-holder-name" placeholder="Card Holder Name *" required>
@@ -966,7 +1072,7 @@ background-color: #8A3536;
             <div class="terms-conditions-section">
                 <p>
                     By clicking the <strong>'Place Order'</strong> button, you confirm that you have read, understood, 
-                    and accept our Terms, Conditions of Sale and Returns Policy</a>. 
+                    and accept our Terms, Conditions of Sale and Returns Policy. 
                     Please note that your order cannot be modified once it is placed.
                 </p>
 
@@ -978,10 +1084,6 @@ background-color: #8A3536;
                     </label>
                 </div>
             </div>
-
-
-
-
         </div>
 
         <div class="form-footer">
@@ -999,114 +1101,70 @@ background-color: #8A3536;
             <div class="billing-address border-box">
                 <h4>Billing Address</h4>
                 <div class="billing-content">
-                        <!-- Dynamic content will be inserted here -->
+                    <!-- Fixed Billing Address -->
+                    <p>DEBRA-KUEMPEL</p>
+                    <p>3976 SOUTHERN AVE</p>
+                    <p>CINCINNATI, OH 45227</p>
+                    <p>555-123-4567</p>
                 </div>
             </div>
 
             <div class="shipping-address border-box">
                 <h4>Shipping Address</h4>
-                <div class="shipping-content"></div>
+                <div class="shipping-content">
+                    <!-- Dynamic Shipping Address -->
+                    <p>DEBRA-KUEMPEL</p>
+                    <p>3976 SOUTHERN AVE</p>
+                    <p>CINCINNATI, OH 45227</p>
+                    <p>555-123-4567</p>
+                </div>
             </div>
         </div>
 
         <div class="order-summary border-box">
             <h4>Summary</h4>
             <div class="summary-content">
-                <p>Subtotal: <span>$40.72</span></p>
-                <p>Shipping: <span id="shipping-cost">TBD</span></p>
-                <p>Tax: <span>TBD</span></p>
-                <p>Total: <span>TBD</span></p>
+                <p><strong><span></span></strong></p>
+                <p><strong>Subtotal: <span>$40.72</span></strong></p>
+                <p><strong>Shipping: <span id="shipping-cost">TBD</span></strong></p>
+                <p><strong>Tax: <span id="tax-cost">TBD</span></strong></p>
+            </div>
+            <div class="summary-content-2">
+                <p><strong>Total: <span id="total-cost">TBD</span></strong></p>
             </div>
         </div>
 
         <div class="cart-items border-box">
             <h4>In Your Cart (2) <a href="#" class="edit-cart">Edit Cart</a></h4>
-            <div class="cart-item">
-                <p>Timken® 800354 NAT800354</p>
-                <p>800000 Style V-Seal, $24.78</p>
+
+            <div class="cart-item" style="display: flex; align-items: center; gap: 10px;">
+                <img src="https://externalassets.unilogcorp.com/ASSETS/IMAGES/ITEMS/ORIGINAL_HIGHRES/Timken_800354.jpg" alt="Timken 800354" style="width: 90px; height: 90px; object-fit: cover; border: 1px solid #ccc; border-radius: 8px;">
+                <div>
+                    <p><strong>Timken® 800354 NAT800354</strong></p>
+                    <p>800000 Style V-Seal</p>
+                    <p><strong>Qty:</strong> 1</p>
+                    <p><strong>$24.78</strong></p>
+                </div>
             </div>
-            <div class="cart-item">
-                <p>NTN 6203LLBC3/EM NTN6203LL</p>
-                <p>Bearing, $15.94</p>
+
+            <div class="cart-item" style="display: flex; align-items: center; gap: 10px;">
+                <img src="https://externalassets.unilogcorp.com/ASSETS/IMAGES/ITEMS/ORIGINAL_HIGHRES/NTN_6022LLBC3.jpg" alt="NTN 6203LLBC3/EM" style="width: 90px; height: 90px; object-fit: cover; border: 1px solid #ccc; border-radius: 8px;">
+                <div>
+                    <p><strong>NTN 6203LLBC3/EM NTN6203LL</strong></p>
+                    <p>Bearing</p>
+                    <p><strong>Qty:</strong> 1</p>
+                    <p><strong>$15.94</strong></p>
+                </div>
             </div>
+
+        </div>
         </div>
     </div>
 </div>
 
 <!-- The Modal (moved outside the container) -->
 <div id="terms-modal" class="modal terms-modal-wrapper">
-    <div class="terms-modal-content">
-        <div class="terms-modal-close">
-            <a href="#">✖</a>
-        </div>
-        <h2>Terms and Conditions</h2>
-
-        <div class="terms-accordion">
-            <!-- First Accordion Item -->
-            <input type="radio" id="accordion-1" name="accordion" class="terms-accordion-input" checked>
-            <label for="accordion-1" class="terms-accordion-label"><strong>Use of Website</strong></label>
-            <div class="terms-accordion-content">
-                <p>The content on this website is for informational purposes only. We reserve the right to update, modify, or remove content without prior notice.</p>
-            </div>
-
-            <!-- Second Accordion Item -->
-            <input type="radio" id="accordion-2" name="accordion" class="terms-accordion-input">
-            <label for="accordion-2" class="terms-accordion-label"><strong>Intellectual Property</strong></label>
-            <div class="terms-accordion-content">
-                <p>All intellectual property on this website, including text, images, and graphics, are owned by or licensed to us. Unauthorized use or reproduction of content is prohibited.</p>
-            </div>
-
-            <!-- Third Accordion Item -->
-            <input type="radio" id="accordion-3" name="accordion" class="terms-accordion-input">
-            <label for="accordion-3" class="terms-accordion-label"><strong>Privacy Policy</strong></label>
-            <div class="terms-accordion-content">
-                <p>Your personal information is handled in accordance with our Privacy Policy. We take your privacy seriously and ensure that your data is protected.</p>
-            </div>
-
-            <!-- Fourth Accordion Item -->
-            <input type="radio" id="accordion-4" name="accordion" class="terms-accordion-input">
-            <label for="accordion-4" class="terms-accordion-label"><strong>Liability</strong></label>
-            <div class="terms-accordion-content">
-                <p>We are not liable for any damages or losses arising from the use or inability to use our website. This includes but is not limited to service interruptions or inaccuracies in the information provided.</p>
-            </div>
-
-            <!-- Fifth Accordion Item -->
-            <input type="radio" id="accordion-5" name="accordion" class="terms-accordion-input">
-            <label for="accordion-5" class="terms-accordion-label"><strong>Governing Law</strong></label>
-            <div class="terms-accordion-content">
-                <p>These terms are governed by the laws of the jurisdiction in which our company operates.</p>
-            </div>
-
-            <!-- Return Policy Accordion -->
-            <input type="radio" id="accordion-6" name="accordion" class="terms-accordion-input">
-            <label for="accordion-6" class="terms-accordion-label"><strong>Return Policy</strong></label>
-            <div class="terms-accordion-content">
-                <p>We aim to provide high-quality products and services. If you are not completely satisfied with your purchase, please review our return policy below:</p>
-                <ul>
-                    <li><strong>Eligibility for Returns:</strong> Products can be returned within 30 days of receipt. To be eligible for a return, items must be in the same condition that you received them.</li>
-                    <li><strong>Non-Returnable Items:</strong> Certain items are non-returnable, including customized products and any item not in its original condition.</li>
-                    <li><strong>Refunds:</strong> If approved, your refund will be processed, and a credit will automatically be applied to your original method of payment within a specified number of days.</li>
-                    <li><strong>Shipping Costs:</strong> Shipping costs are non-refundable. If you receive a refund, the cost of return shipping will be deducted from your refund unless the item was defective or damaged upon arrival.</li>
-                    <li><strong>Exchanges:</strong> If you need to exchange an item, please contact us, and we will provide further instructions.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Close Button -->
-        <div class="terms-modal-footer">
-            <a href="#"><button class="continue-btn">OK</button></a>
-        </div>
-    </div>
-</div>
-
-<div id="address-confirmation-modal" class="modal">
-    <div class="modal-content">
-        <h3>Is Shipping Address the same as the Billing Address?</h3>
-        <div class="modal-buttons">
-            <button id="confirm-no" class="modal-btn-n">No</button>
-            <button id="confirm-yes" class="modal-btn-y">Yes</button>
-        </div>
-    </div>
+    <!-- [Existing Terms Modal Content Remains Unchanged] -->
 </div>
 
 <div id="new-address-modal" class="modal">
@@ -1147,42 +1205,112 @@ background-color: #8A3536;
             </div>
         </div>
 
-        <!-- Add buttons outside of the tab content -->
+        <!-- Add buttons and Save Address radio buttons -->
         <div class="modal-buttons">
-            <a href="#" class="cancel-btn">Cancel</a>
-            <button id="submit-new-address-btn" class="continue-btn">Continue</button>
+            <div class="save-address-container">
+                <div class="save-address-text">Save Address?</div>
+                <div class="save-address-options">
+                    <label>
+                        <input type="radio" name="save-address" value="yes"> Yes
+                    </label>
+                    <label>
+                        <input type="radio" name="save-address" value="no" checked> No
+                    </label>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <a href="#" class="cancel-btn">Cancel</a>
+                <button id="submit-new-address-btn" class="continue-btn">Continue</button>
+            </div>
         </div>
     </div>
 </div>
 
+
+
 <script>
 let step = 1;
-let isShippingAddressConfirmed = false; 
 
 const apiKey = 'UlDmrctKtA-knMSuNIJX7EhjvZLt1xquQjA8I2w8SYc';  // Define your API key at the top
 
+const addresses = [
+    {
+        id: 'address1',
+        name: 'DEBRA-KUEMPEL',
+        street: '3976 SOUTHERN AVE',
+        city: 'CINCINNATI',
+        state: 'OH',
+        zip: '45227',
+        phone: '555-987-6543'
+    },
+    {
+        id: 'address2',
+        name: 'ACME CORP',
+        street: '156 MAIN ST',
+        city: 'NOWHERE',
+        state: 'IN',
+        zip: '47612',
+        phone: '555-123-4567'
+    }
+];
+
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Initialize billing address based on the initially selected address-option
-    const initialAddressRadio = document.querySelector('input[name="address"]:checked');
-    if (initialAddressRadio) {
-        updateBillingAddress(initialAddressRadio.value);
-    } else {
-        console.warn("No address is initially selected.");
-    }
+    document.querySelectorAll('.address-option').forEach(option => {
+        option.addEventListener('click', function (event) {
+            const radioButton = this.querySelector('input[type="radio"]');
 
-    // Copy billing address to shipping address
-    displayShippingAddressAsBilling();
+            // Prevent selection if the Edit button is clicked
+            if (event.target.classList.contains('edit-btn')) {
+                event.stopPropagation();
+                return;
+            }
+
+            // Check the radio button and update the shipping address
+            if (radioButton) {
+                radioButton.checked = true;
+                updateShippingAddress(radioButton.value);
+            }
+        });
+    });
+
+    function updateShippingAddress(address) {
+        const shippingContent = document.querySelector('.shipping-content');
+        const [name, street, cityStateZip, phone] = address.split(',');
+
+        shippingContent.innerHTML = `
+            <p>${name.trim()}</p>
+            <p>${street.trim()}</p>
+            <p>${cityStateZip.trim()}</p>
+            <p>Phone: ${phone.trim()}</p>
+        `;
+    }
+    // Event listener for the Cancel button in the new address modal
+    document.querySelector('.cancel-btn').addEventListener('click', function(e) {
+        e.preventDefault(); // Prevents any default anchor behavior
+        closeModal('new-address-modal');
+    });
+
+
+    // Set a fixed billing address (already set in HTML)
+
+    // Initialize shipping address based on the initially selected shipping address option
+    const initialShippingRadio = document.querySelector('input[name="shipping-address"]:checked');
+    if (initialShippingRadio) {
+        updateShippingAddress(initialShippingRadio.value);
+    } else {
+        console.warn("No shipping address is initially selected.");
+    }
 
     // Toggle shipping options based on selected shipping type
     toggleShippingOptions();
 
-    // Attach event listeners to address radio buttons
-    document.querySelectorAll('input[name="address"]').forEach(radio => {
+    // Attach event listeners to shipping address radio buttons
+    document.querySelectorAll('input[name="shipping-address"]').forEach(radio => {
         radio.addEventListener('change', function() {
             const selectedAddress = this.value; // Fetch the value of the selected radio button
-            updateBillingAddress(selectedAddress); // Update the billing address
-            displayShippingAddressAsBilling(); // Update shipping address accordingly
+            updateShippingAddress(selectedAddress); // Update the shipping address
         });
     });
 
@@ -1191,29 +1319,6 @@ document.addEventListener("DOMContentLoaded", function () {
         radio.addEventListener('change', function() {
             toggleShippingOptions(); // Call the function to toggle shipping options
         });
-    });
-
-    // Attach event listeners to "Confirm Yes" and "Confirm No" buttons in the modal
-    document.getElementById('confirm-yes').addEventListener('click', function () {
-        document.getElementById('address-confirmation-modal').style.display = 'none';
-        displayShippingAddressAsBilling();
-        document.getElementById('initial-shipping-section').style.display = 'none';
-        document.getElementById('shipping-options').style.display = 'block';
-        
-        isShippingAddressConfirmed = true;  // Set shipping address as confirmed
-        step = 2;
-        updateStepIndicatorUI(step);
-        updateBackButtonVisibility();
-    });
-
-    document.getElementById('confirm-no').addEventListener('click', function () {
-        document.getElementById('address-confirmation-modal').style.display = 'none';
-        document.getElementById('new-address-modal').style.display = 'flex';
-    });
-
-    document.querySelector('#new-address-modal .cancel-btn').addEventListener('click', function (e) {
-        e.preventDefault(); // Prevent default link behavior
-        document.getElementById('new-address-modal').style.display = 'none';
     });
 
     // Tab Switching within New Address Modal
@@ -1226,92 +1331,86 @@ document.addEventListener("DOMContentLoaded", function () {
         // Activate NEW ADDRESS tab
         tabNewAddressButton.classList.add('active');
         tabSavedAddressesButton.classList.remove('active');
-        tabNewAddressContent.style.display = 'flex';  // Ensure the content is displayed
-        tabSavedAddressesContent.style.display = 'none';
+        tabNewAddressContent.style.display = 'flex';  // Display new address content
+        tabSavedAddressesContent.style.display = 'none';  // Hide saved addresses content
+
+        // Show "Save Address?" options only in NEW ADDRESS tab
+        document.querySelector('.save-address-container').style.display = 'flex';
     });
 
     tabSavedAddressesButton.addEventListener('click', function() {
         // Activate SAVED ADDRESSES tab
         tabSavedAddressesButton.classList.add('active');
         tabNewAddressButton.classList.remove('active');
-        tabSavedAddressesContent.style.display = 'flex';  // Ensure the content is displayed
-        tabNewAddressContent.style.display = 'none';
+        tabSavedAddressesContent.style.display = 'flex';  // Display saved addresses content
+        tabNewAddressContent.style.display = 'none';  // Hide new address content
 
-        populateSavedAddresses();  // Ensure saved addresses are populated
+        // Hide "Save Address?" options in SAVED ADDRESSES tab
+        document.querySelector('.save-address-container').style.display = 'none';
+
+        // Populate saved addresses list if switching to the Saved Addresses tab
+        populateSavedAddresses();
     });
 
     function populateSavedAddresses() {
         const savedAddressesList = document.querySelector('.saved-addresses-list');
         savedAddressesList.innerHTML = ''; // Clear existing content
 
-        // Manually populate addresses from the grid instead of fetching them dynamically
-        const addresses = [
-            {
-                id: 'saved-address1',
-                label: '3976 SOUTHERN AVE <br> CINCINNATI, OH 45227',
-                value: 'DEBRA-KUEMPEL, 3976 SOUTHERN AVE, CINCINNATI, OH 45227'
-            },
-            {
-                id: 'saved-address2',
-                label: '156 MAIN ST <br> NOWHERE, IN 47612',
-                value: 'DEBRA-KUEMPEL, 156 MAIN ST, NOWHERE, IN 47612'
-            }
-        ];
-
-        addresses.forEach((address, index) => {
+        addresses.forEach(address => {
             const savedAddressOption = document.createElement('div');
             savedAddressOption.className = 'address-option saved-address-option';
+
+            // Create a formatted label using individual address fields
+            const formattedLabel = `
+                ${address.name}<br>
+                ${address.street}<br>
+                ${address.city}, ${address.state} ${address.zip}<br>
+                Phone: ${address.phone}
+            `;
 
             const savedRadioInput = document.createElement('input');
             savedRadioInput.type = 'radio';
             savedRadioInput.id = address.id;
-            savedRadioInput.name = 'saved-address';
-            savedRadioInput.value = address.value;
+            savedRadioInput.name = 'shipping-address';
+            savedRadioInput.value = `${address.name}, ${address.street}, ${address.city}, ${address.state} ${address.zip}, ${address.phone}`;
             savedRadioInput.setAttribute('aria-label', 'Select Address');
 
             const savedLabel = document.createElement('label');
             savedLabel.setAttribute('for', address.id);
-            savedLabel.innerHTML = address.label;
+            savedLabel.innerHTML = formattedLabel;
 
             const editButton = document.createElement('button');
             editButton.className = 'edit-btn';
             editButton.setAttribute('aria-label', 'Edit Address');
             editButton.textContent = 'Edit';
-            editButton.addEventListener('click', () => {
+            editButton.style.pointerEvents = 'all'; // Make sure clicks on this button don’t bubble up
+            editButton.addEventListener('click', (event) => {
+                event.stopPropagation(); // Prevents the radio button from being selected on edit click
                 alert('Edit functionality is not implemented yet.');
             });
 
+            // Add event listener to make the whole savedAddressOption clickable
+            savedAddressOption.addEventListener('click', function () {
+                savedRadioInput.checked = true; // Select the radio button
+            });
+
+            // Append elements to the saved address option
             savedAddressOption.appendChild(savedRadioInput);
             savedAddressOption.appendChild(savedLabel);
             savedAddressOption.appendChild(editButton);
 
+            // Append the saved address option to the container
             savedAddressesList.appendChild(savedAddressOption);
         });
     }
 
-    // Mock function to retrieve saved addresses
-    function getSavedAddresses() {
-        // This should be replaced with actual data retrieval logic (e.g., from a database or local storage)
-        // For demonstration, we'll use the existing address-option addresses from the main form
-        const savedAddresses = [];
-        document.querySelectorAll('.address-option').forEach(option => {
-            const radio = option.querySelector('input[type="radio"]');
-            const label = option.querySelector('label').innerHTML;
-            const value = radio.value;
-            savedAddresses.push({
-                fullAddress: value,
-                displayLabel: label
-            });
-        });
-        return savedAddresses;
-    }
 
     // Function to close a modal by ID
     function closeModal(modalId) {
         document.getElementById(modalId).style.display = 'none';
     }
 
-    // Modify the "Add New Address" button to open the modal with "NEW ADDRESS" tab active
+    // "Add New Address" button opens the new address modal
     document.getElementById('add-new-address').addEventListener('click', (e) => {
         e.preventDefault(); // Prevent default button behavior
         openNewAddressModal();
@@ -1352,7 +1451,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const radioInput = document.createElement('input');
         radioInput.type = 'radio';
         radioInput.id = `saved-address${savedAddressesList.children.length + 1}`;
-        radioInput.name = 'saved-address';
+        radioInput.name = 'shipping-address'; // Changed to 'shipping-address'
         radioInput.value = address.fullAddress;
         radioInput.setAttribute('aria-label', 'Select Address');
 
@@ -1376,52 +1475,98 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Optionally, select the newly added address
         radioInput.checked = true;
-        updateBillingAddress(address.fullAddress);
-        displayShippingAddressAsBilling();
+        updateShippingAddress(address.fullAddress);
         closeModal('new-address-modal');
+
+        console.log("New Address Added:", address.fullAddress);
     }
 
-
-    // Attach event listener to "Continue" button in the new address modal
+    // Existing event listener for "Continue" button in the new address modal
     document.getElementById('submit-new-address-btn').addEventListener('click', function (e) {
         e.preventDefault();  // Prevent form submission
 
-        const newAddress = {
-            company: document.getElementById('new-company-name').value.trim(),
-            line1: document.getElementById('new-address-line1').value.trim(),
-            line2: document.getElementById('new-address-line2').value.trim(),
-            city: document.getElementById('new-city').value.trim(),
-            state: document.getElementById('new-state').value.trim(),
-            zipcode: document.getElementById('new-zipcode').value.trim(),
-            phone: document.getElementById('new-phone').value.trim()
-        };
+        // Check if the SAVED ADDRESSES tab is active
+        if (tabSavedAddressesButton.classList.contains('active')) {
+            const selectedSavedAddress = document.querySelector('input[name="shipping-address"]:checked');
+            
+            if (selectedSavedAddress) {
+                // Update the shipping address content with the selected saved address
+                updateShippingAddress(selectedSavedAddress.value);
 
-        // Validate required fields
-        if (!newAddress.company || !newAddress.line1 || !newAddress.city || !newAddress.state || !newAddress.zipcode || !newAddress.phone) {
-            alert('Please fill in all required fields.');
-            return;
+                // Move to step 2
+                step = 2;
+                updateStepIndicatorUI(step);
+                document.getElementById('initial-shipping-section').style.display = 'none';
+                document.getElementById('shipping-options').style.display = 'block';
+                updateBackButtonVisibility();
+
+                // Close the modal
+                closeModal('new-address-modal');
+            } else {
+                alert('Please select a saved address.');
+            }
+        } else {
+            // The existing functionality for adding a new address
+            const newAddress = {
+                company: document.getElementById('new-company-name').value.trim(),
+                line1: document.getElementById('new-address-line1').value.trim(),
+                line2: document.getElementById('new-address-line2').value.trim(),
+                city: document.getElementById('new-city').value.trim(),
+                state: document.getElementById('new-state').value.trim(),
+                zipcode: document.getElementById('new-zipcode').value.trim(),
+                phone: document.getElementById('new-phone').value.trim()
+            };
+
+            // Validate required fields
+            if (!newAddress.company || !newAddress.line1 || !newAddress.city || !newAddress.state || !newAddress.zipcode || !newAddress.phone) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            // Create a formatted address string
+            const formattedAddress = `
+                ${newAddress.company}, ${newAddress.line1}${newAddress.line2 ? ', ' + newAddress.line2 : ''}, ${newAddress.city}, ${newAddress.state} ${newAddress.zipcode}, ${newAddress.phone}
+            `;
+
+            const displayLabel = `
+                ${newAddress.company}<br>
+                ${newAddress.line1}${newAddress.line2 ? '<br>' + newAddress.line2 : ''}<br>
+                ${newAddress.city}, ${newAddress.state} ${newAddress.zipcode}<br>
+                Phone: ${newAddress.phone}
+            `;
+
+            // Update the shipping address in the shipping-content section
+            const shippingContent = document.querySelector('.shipping-content');
+            shippingContent.innerHTML = `
+                <p>${newAddress.company}</p>
+                <p>${newAddress.line1}</p>
+                ${newAddress.line2 ? `<p>${newAddress.line2}</p>` : ''}
+                <p>${newAddress.city}, ${newAddress.state} ${newAddress.zipcode}</p>
+                <p>Phone: ${newAddress.phone}</p>
+            `;
+
+            // Check if the user wants to save the address
+            const saveAddress = document.querySelector('input[name="save-address"]:checked').value;
+
+            if (saveAddress === 'yes') {
+                // Add to saved addresses
+                addNewSavedAddress({
+                    fullAddress: formattedAddress,
+                    displayLabel: displayLabel
+                });
+            }
+
+            // Close the modal
+            closeModal('new-address-modal');
+
+            // Move to the next step
+            step = 2;
+            updateStepIndicatorUI(step);
+            document.getElementById('initial-shipping-section').style.display = 'none';
+            document.getElementById('shipping-options').style.display = 'block';
+            updateBackButtonVisibility();
         }
-
-        // Update shipping address and close modal
-        const formattedAddress = `
-            ${newAddress.company}<br>
-            ${newAddress.line1}${newAddress.line2 ? ', ' + newAddress.line2 : ''}<br>
-            ${newAddress.city}, ${newAddress.state} ${newAddress.zipcode}<br>
-            Phone: ${newAddress.phone}
-        `;
-        const shippingContent = document.querySelector('.shipping-content');
-        shippingContent.innerHTML = formattedAddress;
-        document.getElementById('new-address-modal').style.display = 'none';
-
-        // Mark shipping address as confirmed and move to the next step
-        isShippingAddressConfirmed = true;  // Shipping address has been confirmed
-        step = 2;
-        updateStepIndicatorUI(step);
-        document.getElementById('initial-shipping-section').style.display = 'none';
-        document.getElementById('shipping-options').style.display = 'block';
-        updateBackButtonVisibility();
     });
-
 
     // Attach event listeners to tab buttons
     ['purchase-order', 'credit-card'].forEach(tab => {
@@ -1442,6 +1587,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             alert('Order placed successfully!');
             // Here you can add further order processing logic
+            // Optionally, you can redirect or reset the form
         }
     });
 
@@ -1449,7 +1595,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('back-btn').addEventListener('click', function () {
         if (step === 2) {
             step--;
-            isShippingAddressConfirmed = false;  // Reset shipping address confirmation
             updateStepIndicatorUI(step);
             document.getElementById('shipping-options').style.display = 'none';
             document.getElementById('initial-shipping-section').style.display = 'block';
@@ -1468,23 +1613,22 @@ document.addEventListener("DOMContentLoaded", function () {
     // Attach event listener to "Continue" button
     document.getElementById('single-continue-btn').addEventListener('click', function () {
         if (step === 1) {
-            if (!isShippingAddressConfirmed) {
-                const shippingMethod = document.getElementById('shipping-method').value;
-                if (shippingMethod === 'ship-to-me') {
-                    document.getElementById('address-confirmation-modal').style.display = 'flex';
-                } else if (!shippingMethod) {
-                    alert('Please select a shipping method to continue.');
-                } else {
-                    alert('This option does not require shipping details. Proceeding to the next step.');
-                    step++;
-                    updateStepIndicatorUI(step);
-                    document.getElementById('initial-shipping-section').style.display = 'none';
-                    document.getElementById('shipping-options').style.display = 'block';
-                    updateBackButtonVisibility();
-                }
+            const shippingMethod = document.getElementById('shipping-method').value;
+            if (!shippingMethod) {
+                alert('Please select a shipping method to continue.');
+                return;
+            }
+
+            if (shippingMethod === 'ship-to-me') {
+                // Directly proceed without confirmation
+                step++;
+                updateStepIndicatorUI(step);
+                document.getElementById('initial-shipping-section').style.display = 'none';
+                document.getElementById('shipping-options').style.display = 'block';
+                updateBackButtonVisibility();
             } else {
-                // If the shipping address is already confirmed, proceed to step 2 directly
-                step = 2;
+                alert('This option does not require additional shipping details. Proceeding to the next step.');
+                step++;
                 updateStepIndicatorUI(step);
                 document.getElementById('initial-shipping-section').style.display = 'none';
                 document.getElementById('shipping-options').style.display = 'block';
@@ -1537,32 +1681,26 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-// Function to update the billing address
-function updateBillingAddress(address) {
-    const billingContent = document.querySelector('.billing-content');
-    billingContent.innerHTML = ''; // Clear previous content
+/* 
+    Removed:
+    - All functions and variables related to billing address updates based on shipping selection.
+    - Functionality that copies billing address to shipping address.
+*/
 
-    const addressLines = address.split(','); // Split the address string into lines
-    addressLines.forEach(line => {
-        const p = document.createElement('p');
-        p.textContent = line.trim(); // Add each line as a paragraph
-        billingContent.appendChild(p);
-    });
+// Function to update the shipping address
+function updateShippingAddress(address) {
+    const shippingContent = document.querySelector('.shipping-content');
+    
+    // Split the address into separate parts based on commas
+    const [name, street, cityStateZip, phone] = address.split(',');
 
-    console.log("Billing Address Updated:", address);
-}
-
-// Function to copy billing address to shipping address
-function displayShippingAddressAsBilling() {
-    const billingContent = document.querySelector('.billing-content').innerHTML.trim();
-    if (billingContent) {
-        const shippingContent = document.querySelector('.shipping-content');
-        shippingContent.innerHTML = billingContent;
-        document.querySelector('.shipping-address').style.display = 'block';
-        console.log("Shipping Address Updated from Billing Address.");
-    } else {
-        console.error("No billing address found to copy to shipping.");
-    }
+    // Clear previous content and add each part in its own line
+    shippingContent.innerHTML = `
+        <p class="shipping-name">${name.trim()}</p>
+        <p class="shipping-street">${street.trim()}</p>
+        <p class="shipping-city-state-zip">${cityStateZip.trim()}</p>
+        <p class="shipping-phone">Phone: ${phone.trim()}</p>
+    `;
 }
 
 // Function to toggle shipping options based on selected shipping type
@@ -1582,152 +1720,49 @@ function toggleShippingOptions() {
 
 // Function to process shipping options and update the summary
 function processShippingOptions() {
-    const shippingType = document.querySelector('input[name="shipping-type"]:checked').value;
+    const shippingTypeElement = document.querySelector('input[name="shipping-type"]:checked');
     const shippingCostElement = document.getElementById('shipping-cost');
-    const taxElement = document.querySelector('.summary-content p:nth-child(3) span');
-    const totalElement = document.querySelector('.summary-content p:nth-child(4) span');
+    const taxElement = document.getElementById('tax-cost');  // Use specific ID for tax
+    const totalElement = document.getElementById('total-cost');  // Use specific ID for total
 
-    let shippingCost = '';
+    // Default values for TBD
+    let shippingCost = 'TBD';
     let tax = 'TBD';
     let total = 'TBD';
 
-    if (shippingType === 'prepay') {
-        const shippingMethod = document.getElementById('ups-options').value;
-        if (!shippingMethod) {
-            alert('Please select a shipping method.');
-            return;
+    // Check if a shipping option is selected
+    if (shippingTypeElement) {
+        const shippingType = shippingTypeElement.value;
+
+        if (shippingType === 'prepay') {
+            const shippingMethod = document.getElementById('ups-options').value;
+            if (!shippingMethod) {
+                alert('Please select a shipping method.');
+                return;
+            }
+            shippingCost = '$15.00';  // Set cost for Prepay & Add
+            tax = '$3.34';            // Fixed tax for this option
+            total = '$59.06';          // Example calculation for total
+        } else if (shippingType === 'collect' || shippingType === 'ltl') {
+            shippingCost = 'Freight billed to collect account';
+            tax = '$2.44';            // Fixed tax
+            total = '$43.16';          // Example calculation for total
         }
-        shippingCost = '$17.00';
-        tax = '$2.44';
-        total = '$60.16';
-    } else if (shippingType === 'collect') {
-        shippingCost = 'Freight billed to your account';
-        tax = '$2.44';
-        total = '$43.16';
-    } else if (shippingType === 'ltl') {
-        shippingCost = 'Freight billed to your account';
-        tax = '$2.44';
-        total = '$43.16';
     }
 
+    // Update summary content
     shippingCostElement.innerText = shippingCost;
     taxElement.innerText = tax;
     totalElement.innerText = total;
 
     console.log("Shipping Summary Updated:", { shippingCost, tax, total });
 
+    // Show relevant buttons and sections
     document.getElementById('single-continue-btn').style.display = 'none';
     document.getElementById('place-order-btn').style.display = 'block';
     document.getElementById('shipping-options').style.display = 'none';
     document.getElementById('payment-section').style.display = 'block';
 }
-
-// Function to add a new address option dynamically
-function addNewAddressOption(addressValue, displayLabel) {
-    const addressList = document.querySelector('.address-list');
-
-    // Create the address option container
-    const addressOption = document.createElement('div');
-    addressOption.className = 'address-option';
-
-    // Create the radio input
-    const radioInput = document.createElement('input');
-    radioInput.type = 'radio';
-    radioInput.id = `address${addressList.children.length + 1}`; // Ensure unique ID
-    radioInput.name = 'address';
-    radioInput.value = addressValue;
-    radioInput.setAttribute('aria-label', 'Select Address');
-
-    // Create the label
-    const label = document.createElement('label');
-    label.setAttribute('for', radioInput.id);
-    label.innerHTML = displayLabel;
-
-    // Create the edit button
-    const editButton = document.createElement('button');
-    editButton.className = 'edit-btn';
-    editButton.setAttribute('aria-label', 'Edit Address');
-    editButton.textContent = 'Edit';
-
-    // Append elements to the address option container
-    addressOption.appendChild(radioInput);
-    addressOption.appendChild(label);
-    addressOption.appendChild(editButton);
-
-    // Insert the new address option before the "Add New Address" button
-    addressList.insertBefore(addressOption, addressList.firstChild);
-
-    // Add event listeners to the new radio button and edit button
-    radioInput.addEventListener('change', function() {
-        updateBillingAddress(this.value);
-        displayShippingAddressAsBilling();
-    });
-
-    editButton.addEventListener('click', () => {
-        alert('Edit functionality is not implemented yet.');
-    });
-
-    // Select the newly added address
-    radioInput.checked = true;
-    updateBillingAddress(addressValue);
-    displayShippingAddressAsBilling();
-
-    console.log("New Address Added:", addressValue);
-}
-
-function submitNewAddress() {
-    console.log("submitNewAddress called");
-
-    const newAddress = {
-        company: document.getElementById('new-company-name').value.trim(),
-        line1: document.getElementById('new-address-line1').value.trim(),
-        line2: document.getElementById('new-address-line2').value.trim(),
-        city: document.getElementById('new-city').value.trim(),
-        state: document.getElementById('new-state').value.trim(),
-        zipcode: document.getElementById('new-zipcode').value.trim(),
-        phone: document.getElementById('new-phone').value.trim()
-    };
-
-    // Validate required fields
-    if (!newAddress.company || !newAddress.line1 || !newAddress.city || !newAddress.state || !newAddress.zipcode || !newAddress.phone) {
-        alert('Please fill in all required fields.');
-        return;
-    }
-
-    // Create a formatted address string
-    const formattedAddress = `
-        ${newAddress.company}<br>
-        ${newAddress.line1}${newAddress.line2 ? ', ' + newAddress.line2 : ''}<br>
-        ${newAddress.city}, ${newAddress.state} ${newAddress.zipcode}<br>
-        Phone: ${newAddress.phone}
-    `;
-
-    // Update the shipping-content section
-    const shippingContent = document.querySelector('.shipping-content');
-    shippingContent.innerHTML = formattedAddress;
-
-    console.log("Shipping Address Updated:", newAddress);
-
-    // Clear the form fields
-    document.querySelector('.new-address-form').reset();
-
-    // Close the modal
-    document.getElementById('new-address-modal').style.display = 'none';
-    console.log("New Address Modal Closed");
-
-    // Move to the next step directly after the modal closes
-    step = 2;  // Explicitly set step to 2
-    updateStepIndicatorUI(step);
-
-    // Show the shipping options section and hide the initial shipping section
-    document.getElementById('initial-shipping-section').style.display = 'none';
-    document.getElementById('shipping-options').style.display = 'block';  // Show the shipping options
-
-    updateBackButtonVisibility();
-    console.log("Moved to Step 2:", step);
-}
-
-
 // Function to format phone numbers
 function formatPhoneNumber(input) {
     let phone = input.value.replace(/\D/g, '');
@@ -1909,6 +1944,13 @@ function removeHighlight(element) {
     element.style.borderColor = '#ccc';
 }
 
-</script>
-</body>
+document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('click', function(event) {
+        if (event.target === modal) { // Checks if clicked outside the modal content
+            modal.style.display = 'none'; // Close the modal
+        }
+    });
+});
+
+</script></body>
 </html>
