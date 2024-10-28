@@ -1178,6 +1178,33 @@ background-color: #8A3536;
             background-color: #f9f9f9;
         }
 
+        .order-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            flex-wrap: wrap; 
+        }
+
+        .order-info-left {
+            flex: 1;
+            min-width: 200px; 
+            height: 100%;
+            padding: 15px;
+            text-align: left;
+            margin-right: 0px;
+        }
+
+        .payment-details {
+            min-width: 200px;
+            padding: 15px;
+            border: 1px solid #053856;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            flex: 1;
+            margin-right: 20px;
+        }
+
         .order-details-container h2 {
             text-align: center;
             margin-bottom: 10px;
@@ -1271,8 +1298,76 @@ background-color: #8A3536;
             background-color: #B4C8D5;
         }
 
-        /* Responsive Styles */
+        .shipping-details-summary {
+            margin-top: 15px;
+            font-size: 12px;
+        }
+
+        .shipping-details-summary button {
+            margin-top: 5px;
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #EDEDED;
+            color: black;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease; 
+            font-size: 14px;
+            border-radius: 4px;
+        }
+
+        .shipping-details-summary button:hover {
+            background-color: #8F8F8F;
+            color: white;
+        }
+
+        #shipping-details-expanded {
+            width: 100%;
+            max-height: 0; 
+            opacity: 0;
+            overflow-y: auto; 
+            overflow-x: hidden;
+            transition: max-height 0.5s ease, opacity 0.5s ease; 
+            margin-top: 10px; 
+            border-radius: 5px; 
+            word-wrap: break-word;
+        }
+
+        #shipping-details-expanded p,
+        #shipping-details-expanded div {
+            max-width: 100%;
+            word-wrap: break-word; /* Ensure content wraps within the container */
+        }
+
+        #shipping-details-expanded.expanded {
+            max-height: 150px; 
+            opacity: 1;
+        }
+
+        #shipping-details-expanded::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #shipping-details-expanded::-webkit-scrollbar-thumb {
+            background-color: #053856;
+            border-radius: 10px;
+        }
+
+        #shipping-details-expanded::-webkit-scrollbar-track {
+            background-color: #f1f1f1; 
+        }
+
+
         @media (max-width: 768px) {
+
+            #shipping-details-expanded {
+                max-height: 300px; /* Adjust as needed for smaller screens */
+            }
+
+            #shipping-details-expanded p {
+                font-size: 13px;
+            }
+
             .order-details-container {
                 padding: 10px;
             }
@@ -1315,7 +1410,6 @@ background-color: #8A3536;
 <body>
 
 <div class="container">
-    <!-- Shipping Section -->
     <div class="shipping-section border-box">
         <div class="form-header">
             <div class="step-indicator">
@@ -1328,7 +1422,6 @@ background-color: #8A3536;
         </div>
 
         <div class="form-body">
-            <!-- Initial Shipping Section -->
             <div id="initial-shipping-section">
                 <div class="shipping-address">
                     <h3>Select Shipping</h3>
@@ -1354,21 +1447,19 @@ background-color: #8A3536;
                         <span id="search-button">🔎︎</span>
                     </div>
 
-                    <h5>Select Shipping Address</h5> <!-- Changed label for clarity -->
+                    <h5>Select Shipping Address</h5>
 
-                    <!-- Updated Address List: Removed static address options -->
                     <div class="address-list grid-3-columns" id="main-address-list">
                         <div class="add-address-option">
                             <button id="add-new-address">+ Add New Address</button>
                         </div>
-                        <!-- Dynamic address-option divs will be inserted here -->
+                        <!-- Dynamic address-option -->
                     </div>
-                    <!-- Added Pagination Controls for Main Address List -->
+                    <!-- Pagin Controls -->
                     <div class="pagination" id="main-pagination-controls"></div>
                 </div>
             </div>
 
-            <!-- Shipping Options (Initially Hidden) -->
             <div id="shipping-options" style="display: none;">
                 <div class="radio-container">
                     <label>
@@ -1387,13 +1478,12 @@ background-color: #8A3536;
 
                 <div class="full-width-divider"></div>
 
-                <!-- Prepay & Add Options -->
                 <div id="prepay-options" class="shipping-detail">
                     <select id="ups-options" aria-label="Select UPS Shipping Service" required>
                         <option value="">Select UPS Shipping Service *</option>
-                        <option value="ground">Ground</option>
-                        <option value="next-day">Next Day Air</option>
-                        <option value="second-day">2nd Day Air</option>
+                        <option value="Ground">Ground</option>
+                        <option value="Next-Day">Next Day Air</option>
+                        <option value="Second-Day">2nd Day Air</option>
                     </select>
 
                     <div class="shipping-instructions-notes">
@@ -1402,13 +1492,12 @@ background-color: #8A3536;
                         <p style="color: red; text-align: center;">UPS ONLY</p>
                 </div>
 
-                <!-- Collect Options -->
                 <div id="collect-options" class="shipping-detail" style="display: none;">
                     <select id="collect-shipping-method" aria-label="Select Collect Shipping Service" required>
                         <option value="">Select UPS Shipping Service *</option>
-                        <option value="ground">Ground</option>
-                        <option value="next-day">Next Day Air</option>
-                        <option value="second-day">2nd Day Air</option>
+                        <option value="Ground">Ground</option>
+                        <option value="Next-Day">Next Day Air</option>
+                        <option value="Second-Day">2nd Day Air</option>
                     </select>
 
                     <input type="text" id="ups-account" placeholder="UPS Account Number *" aria-label="UPS Account Number" required>
@@ -1421,16 +1510,15 @@ background-color: #8A3536;
                         <p style="color: red; text-align: center;">UPS ONLY</p>
                 </div>
 
-                <!-- LTL Collect Options -->
                 <div id="ltl-options" class="shipping-detail" style="display: none;">
                     <select id="courier-name" aria-label="Select Courier Name" required>
                         <option value="" disabled selected>Select Courier Name *</option>
-                        <option value="dayton">Dayton</option>
-                        <option value="fedex-freight">FedEx Freight</option>
-                        <option value="old-dominion">Old Dominion</option>
-                        <option value="rl">R&L</option>
-                        <option value="tforce">TForce</option>
-                        <option value="xpo">XPO</option>
+                        <option value="Dayton">Dayton</option>
+                        <option value="Fedex-Freight">FedEx Freight</option>
+                        <option value="Old-Dominion">Old Dominion</option>
+                        <option value="RL">R&L</option>
+                        <option value="Tforce">TForce</option>
+                        <option value="XPO">XPO</option>
                     </select>
 
                     <input type="text" id="courier-account" placeholder="Courier Account Number *" aria-label="Courier Account Number" required>
@@ -1444,24 +1532,21 @@ background-color: #8A3536;
             </div>
         </div>
 
-        <!-- Payment Section -->
         <div id="payment-section" style="display: none;">
             <div class="tab-container">
                 <button class="tab-button active" id="tab-purchase-order">Purchase Order</button>
                 <button class="tab-button" id="tab-credit-card">Credit Card Payment</button>
             </div>
 
-            <!-- Purchase Order Form -->
             <div id="purchase-order-form" class="tab-content">
                 <input type="text" id="purchase-order-number" placeholder="Purchase Order# *" required>
                 <input type="text" id="ordered-by" placeholder="Ordered By *" required>
-                <input type="date" id="required-by-date" placeholder="Required by Date *" required>
+                <!-- <input type="date" id="required-by-date" placeholder="Required by Date *" required> -->
                 <p>Note: Tax and Freight will be finalized at the time of shipping.</p>
             </div>
 
-            <!-- Credit Card Form -->
             <div id="credit-card-form" class="tab-content" style="display: none;">
-                <input type="text" id="purchase-order-number-number" placeholder="Purchase Order#">
+                <input type="text" id="credit-purchase-order-number" placeholder="Purchase Order#">
                 <input type="text" id="card-number" placeholder="Card Number *" required>
                 <input type="text" id="expiration-date" placeholder="Expiration Date MM/YY *" required>
                 <input type="text" id="card-holder-name" placeholder="Card Holder Name *" required>
@@ -1507,7 +1592,7 @@ background-color: #8A3536;
             <div class="billing-address border-box">
                 <h4>Billing Address</h4>
                 <div class="billing-content">
-                    <!-- Fixed Billing Address -->
+                    <!-- Fixed Billing Add -->
                     <p><strong>DEBRA-KUEMPEL</strong></p>
                     <p>3976 SOUTHERN AVE</p>
                     <p>CINCINNATI, OH 45227</p>
@@ -1517,7 +1602,7 @@ background-color: #8A3536;
             <div class="shipping-address border-box">
                 <h4>Shipping Address</h4>
                 <div class="shipping-content">
-                    <!-- Dynamic Shipping Address -->
+                    <!-- Dynamic Ship Add -->
                     <p><strong>DEBRA-KUEMPEL</strong></p>
                     <p>3976 SOUTHERN AVE</p>
                     <p>CINCINNATI, OH 45227</p>
@@ -1578,13 +1663,11 @@ background-color: #8A3536;
             <a href="#">✖</a>
         </div>
         
-        <!-- Tab Headers -->
         <div class="tab-container">
             <button class="tab-button active" id="tab-new-address">NEW ADDRESS</button>
             <button class="tab-button" id="tab-saved-addresses">SAVED ADDRESSES</button>
         </div>
         
-        <!-- Tab Contents -->
         <div id="tab-new-address-content" class="tab-content">
             <h3>Enter New Shipping Address</h3>
             <div class="new-address-form">
@@ -1606,15 +1689,14 @@ background-color: #8A3536;
         <div id="tab-saved-addresses-content" class="tab-content" style="display: none;">
             <h3>Select a Saved Address</h3>
             <div class="saved-addresses-list grid-3-columns">
-                <!-- Saved addresses will be dynamically inserted here -->
+                <!-- Saved address dynamic insert -->
             </div>
             <!-- Pagination Controls -->
             <div class="pagination" id="pagination-controls">
-                <!-- Pagination buttons will be dynamically inserted here -->
+                <!-- Pagin buttons dynamic insert -->
             </div>
         </div>
 
-        <!-- Add buttons and Save Address radio buttons -->
         <div class="modal-buttons">
             <div class="save-address-container">
                 <div class="save-address-text">Save Address?</div>
@@ -1641,46 +1723,68 @@ background-color: #8A3536;
     <button onclick="showOrderDetails()">Continue to Order Details</button>
 </div>
 
-<!-- Order Details Page -->
 <div id="order-details-page" style="display: none;">
     <div class="order-details-container">
         <h2>Order Details</h2>
-        <p><strong>Order Number:</strong> <span id="order-number">1445678-00</span></p>
-        <p><strong>Order Date:</strong> <span id="order-date"></span></p>
+        
+        <div class="order-info">
 
-        <!-- Addresses -->
+            
+            <div class="payment-details border-box">
+                <h4>Payment Details</h4>
+                <div class="payment-content">
+                    <!-- Payment information populated via JavaScript -->
+                </div>
+            </div>
+
+            <div class="order-info-left">
+                <p><strong>Order Number:</strong> <span id="order-number">1445678-00</span></p>
+                <p><strong>Order Date:</strong> <span id="order-date"></span></p>
+                <div class="shipping-details-summary">
+                    <p id="shipping-summary-collapsed"></p>
+                    <div id="shipping-details-expanded"></div>
+                    <button id="expand-shipping-details-btn" aria-expanded="false">Expand</button>
+                </div>
+            </div>
+        </div>
+        <!-- End of Order Info Section -->
+        
         <div class="address-section">
             <div class="billing-address">
                 <h4>Billing Address</h4>
                 <div class="billing-content">
-                    <!-- Billing address content will be populated here -->
+                    <!-- Fixed Billing Address -->
+                    <p><strong>DEBRA-KUEMPEL</strong></p>
+                    <p>3976 SOUTHERN AVE</p>
+                    <p>CINCINNATI, OH 45227</p>
                 </div>
             </div>
+
             <div class="shipping-address">
                 <h4>Shipping Address</h4>
                 <div class="shipping-content">
-                    <!-- Shipping address content will be populated here -->
+                    <!-- Dynamic Shipping Address -->
+                    <p><strong>DEBRA-KUEMPEL</strong></p>
+                    <p>3976 SOUTHERN AVE</p>
+                    <p>CINCINNATI, OH 45227</p>
                 </div>
             </div>
         </div>
 
-        <!-- Items -->
         <div class="order-items">
             <h4>Items Ordered</h4>
             <div class="order-items-list">
-                <!-- Items will be inserted here -->
+                <!-- Items will pop here -->
             </div>
         </div>
 
-        <!-- Order Summary -->
         <div class="order-summary">
             <h4>Order Summary</h4>
             <div class="summary-content">
-                <!-- Financial summary will be populated here -->
+                <!-- Financial summary will appear here -->
             </div>
         </div>
 
-        <!-- Buttons -->
         <div class="order-buttons">
             <button onclick="printOrderDetails()">Print</button>
             <button onclick="continueShopping()">Continue Shopping</button>
@@ -1688,7 +1792,6 @@ background-color: #8A3536;
     </div>
 </div>
 
-<!-- Spinner Overlay -->
 <div id="spinner-overlay" class="spinner-overlay" style="display: none;">
     <div class="spinner"></div>
 </div>
@@ -1700,6 +1803,7 @@ background-color: #8A3536;
 let step = 1;
 let currentPage = 1;
 let currentPageMain = 1;
+let shippingDetails = {};
 const addressesPerPage = 4;
 const addressesPerPageMain = 2;
 
@@ -1813,12 +1917,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function precheckDefaultAddress() {
-        // Select the radio button with id 'address1-main'
+
         const defaultAddressRadio = document.querySelector('input[name="shipping-address-main"][id="address1-main"]');
         
         if (defaultAddressRadio) {
-            defaultAddressRadio.checked = true; // Check the radio button
-            updateShippingAddress(defaultAddressRadio.value); // Update the shipping address display (if applicable)
+            defaultAddressRadio.checked = true;
+            updateShippingAddress(defaultAddressRadio.value);
         } else {
             console.warn("Default address radio button not found.");
         }
@@ -1913,7 +2017,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <strong>${address.name}</strong><br>
                 ${address.street}<br>
                 ${address.city}, ${address.state} ${address.zip}<br>
-                <!-- Phone number is omitted from display -->
+
             `;
 
             const savedRadioInput = document.createElement('input');
@@ -1977,7 +2081,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <strong>${address.name}</strong><br>
                 ${address.street}<br>
                 ${address.city}, ${address.state} ${address.zip}<br>
-                <!-- Phone number is omitted from display -->
+
             `;
 
             const radioInput = document.createElement('input');
@@ -2136,7 +2240,6 @@ document.addEventListener("DOMContentLoaded", function () {
             setupMainPagination();
         }
 
-        // Update shipping address without phone number
         updateShippingAddress(`${newAddress.name}|${newAddress.street}|${newAddress.city}|${newAddress.state}|${newAddress.zip}`);
         closeModal('new-address-modal');
 
@@ -2148,9 +2251,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (tabSavedAddressesButton.classList.contains('active')) {
             const selectedSavedAddress = document.querySelector('input[name="shipping-address-modal"]:checked');
             if (selectedSavedAddress) {
-                // Exclude phone number when updating shipping address
                 const addressParts = selectedSavedAddress.value.split('|');
-                const addressWithoutPhone = addressParts.slice(0, -1).join('|'); // Removes the phone part
+                const addressWithoutPhone = addressParts.slice(0, -1).join('|');
                 updateShippingAddress(addressWithoutPhone);
                 step = 2;
                 updateStepIndicatorUI(step);
@@ -2185,7 +2287,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 ${newAddress.company}<br>
                 ${newAddress.line1}${newAddress.line2 ? '<br>' + newAddress.line2 : ''}<br>
                 ${newAddress.city}, ${newAddress.state} ${newAddress.zipcode}<br>
-                <!-- Phone number is omitted from display -->
+
             `;
 
             const shippingContent = document.querySelector('.shipping-content');
@@ -2194,7 +2296,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 <p>${newAddress.line1}</p>
                 ${newAddress.line2 ? `<p>${newAddress.line2}</p>` : ''}
                 <p>${newAddress.city}, ${newAddress.state} ${newAddress.zipcode}</p>
-                <!-- Phone number is omitted from display -->
             `;
 
             const saveAddress = document.querySelector('input[name="save-address"]:checked').value;
@@ -2237,10 +2338,9 @@ document.addEventListener("DOMContentLoaded", function () {
             alert('You must agree to the terms and conditions before placing your order.');
             event.preventDefault(); 
         } else {
-            event.preventDefault(); // Prevent default form submission
+            event.preventDefault();
             showSpinner();
 
-            // Simulate a 2-second loading time
             setTimeout(() => {
                 hideSpinner();
                 showOrderConfirmation();
@@ -2259,10 +2359,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function showOrderConfirmation() {
         console.log("showOrderConfirmation() called");
         const confirmationDiv = document.getElementById('order-confirmation');
-        confirmationDiv.style.display = 'flex'; // Ensure it's displayed
+        confirmationDiv.style.display = 'flex';
         setTimeout(() => {
             confirmationDiv.classList.add('show');
-        }, 10); // Slight delay to trigger the transition
+        }, 10);
     }
 
     document.getElementById('back-btn').addEventListener('click', function () {
@@ -2384,14 +2484,73 @@ function processShippingOptions() {
                 alert('Please select a shipping method.');
                 return;
             }
+
+            // Collect shipping details for Prepay & Add
+            shippingDetails = {
+                shippingType: 'Prepay & Add',
+                shippingMethod: shippingMethod,
+                orderNotes: document.getElementById('prepay-order-notes').value.trim(),
+            };
+
             shippingCost = '$15.00'; 
             tax = '$3.34';        
-            total = '$59.06';       
-        } else if (shippingType === 'collect' || shippingType === 'ltl') {
+            total = '$59.06';      
+
+        } else if (shippingType === 'collect') {
+            const shippingMethod = document.getElementById('collect-shipping-method').value;
+            const upsAccountNumber = document.getElementById('ups-account').value.trim();
+            const contactName = document.getElementById('contact-name').value.trim();
+            const contactNumber = document.getElementById('contact-number').value.trim();
+            const orderNotes = document.getElementById('collect-order-notes').value.trim();
+
+            if (!shippingMethod || !upsAccountNumber || !contactName || !contactNumber) {
+                alert('Please fill in all required fields for Collect shipping.');
+                return;
+            }
+
+            // Collect shipping details for Collect
+            shippingDetails = {
+                shippingType: 'Collect',
+                shippingMethod: shippingMethod,
+                upsAccountNumber: upsAccountNumber,
+                contactName: contactName,
+                contactNumber: contactNumber,
+                orderNotes: orderNotes,
+            };
+
+            shippingCost = 'Freight billed to collect account';
+            tax = '$2.44';    
+            total = '$43.16';        
+
+        } else if (shippingType === 'ltl') {
+            const courierName = document.getElementById('courier-name').value;
+            const courierAccountNumber = document.getElementById('courier-account').value.trim();
+            const contactName = document.getElementById('courier-fullname').value.trim();
+            const contactNumber = document.getElementById('courier-contact').value.trim();
+            const orderNotes = document.getElementById('ltl-order-notes').value.trim();
+
+            if (!courierName || !courierAccountNumber || !contactName || !contactNumber) {
+                alert('Please fill in all required fields for LTL Collect shipping.');
+                return;
+            }
+
+            // Collect shipping details for LTL Collect
+            shippingDetails = {
+                shippingType: 'LTL Collect',
+                courierName: courierName,
+                courierAccountNumber: courierAccountNumber,
+                contactName: contactName,
+                contactNumber: contactNumber,
+                orderNotes: orderNotes,
+            };
+
             shippingCost = 'Freight billed to collect account';
             tax = '$2.44';    
             total = '$43.16';        
         }
+    } else {
+        alert('Please select a shipping type.');
+        return;
     }
 
     shippingCostElement.innerText = shippingCost;
@@ -2405,6 +2564,7 @@ function processShippingOptions() {
     document.getElementById('shipping-options').style.display = 'none';
     document.getElementById('payment-section').style.display = 'block';
 }
+
 function formatPhoneNumber(input) {
     let phone = input.value.replace(/\D/g, '');
     if (phone.length > 3 && phone.length <= 6) {
@@ -2459,12 +2619,11 @@ function fetchAddressSuggestions() {
     fetch(autocompleteUrl)
         .then(response => response.json())
         .then(data => {
-            console.log(data.items); // Log API response for debugging
+            console.log(data.items);
             const suggestionsDiv = document.getElementById('address-suggestions');
             suggestionsDiv.innerHTML = ''; 
 
             if (data.items && data.items.length > 0) {
-                // Define US state and territory codes
                 const US_STATES = [ 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
                     'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
                     'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
@@ -2472,7 +2631,6 @@ function fetchAddressSuggestions() {
                     'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY' ];
                 const US_TERRITORIES = ['AS', 'GU', 'MP', 'PR', 'VI', 'UM', 'DC'];
 
-                // Filter items to include only addresses in US states or territories and have a street address
                 const filteredItems = data.items.filter(item => {
                     const address = item.address;
                     if (!address) return false;
@@ -2492,11 +2650,9 @@ function fetchAddressSuggestions() {
                     return;
                 }
 
-                // Extract numeric part of the query
                 const queryNumberMatch = query.match(/\d+/);
                 const queryNumberStr = queryNumberMatch ? queryNumberMatch[0] : '';
 
-                // Assign priority to each item
                 filteredItems.forEach(item => {
                     const address = item.address;
                     const houseNumber = address.houseNumber || '';
@@ -2505,26 +2661,23 @@ function fetchAddressSuggestions() {
 
                     // Prioritize based on house number match
                     if (houseNumber === queryNumberStr) {
-                        item.priority += 3; // Exact match
+                        item.priority += 3;
                     } else if (houseNumber.startsWith(queryNumberStr)) {
-                        item.priority += 2; // Starts with query number
+                        item.priority += 2;
                     } else if (houseNumber.includes(queryNumberStr)) {
-                        item.priority += 1; // Contains query number
+                        item.priority += 1;
                     }
 
-                    // Prioritize if the address label starts with the house number
                     if (addressLabel.startsWith(houseNumber)) {
                         item.priority += 1;
                     }
 
-                    // Prioritize US states over territories
                     const stateCode = address.stateCode || '';
                     if (US_STATES.includes(stateCode)) {
                         item.priority += 1;
                     }
                 });
 
-                // Sort items based on priority (optional)
                 filteredItems.sort((a, b) => b.priority - a.priority);
 
                 const displayItems = filteredItems.slice(0, 10);
@@ -2639,8 +2792,8 @@ function removeHighlight(element) {
 
 document.querySelectorAll('.modal').forEach(modal => {
     modal.addEventListener('click', function(event) {
-        if (event.target === modal) { // Checks if clicked outside the modal content
-            modal.style.display = 'none'; // Close the modal
+        if (event.target === modal) { 
+            modal.style.display = 'none'; 
         }
     });
 });
@@ -2676,11 +2829,9 @@ function applyPromoCode(promoInputId, summarySectionId) {
         if (promoCode === 'DISCOUNT10') {
             const discount = 10.00;
 
-            // Update discount amount and show the row
             discountAmountElement.innerText = `-$${discount.toFixed(2)}`;
             discountRow.style.display = 'block';
 
-            // Adjust the total
             currentTotal -= discount;
             if (currentTotal < 0) currentTotal = 0;
             totalCostElement.innerText = `$${currentTotal.toFixed(2)}`;
@@ -2695,62 +2846,48 @@ function applyPromoCode(promoInputId, summarySectionId) {
     function showOrderConfirmation() {
         console.log("showOrderConfirmation() called");
         const confirmationDiv = document.getElementById('order-confirmation');
-        confirmationDiv.style.display = 'flex'; // Ensure it's displayed
+        confirmationDiv.style.display = 'flex';
         setTimeout(() => {
             confirmationDiv.classList.add('show');
-        }, 10); // Slight delay to trigger the transition
+        }, 10);
     }
 
     function showOrderDetails() {
-        // Hide the order confirmation div
         const confirmationDiv = document.getElementById('order-confirmation');
         confirmationDiv.style.display = 'none';
 
-        // **Hide the main container**
         const containerDiv = document.querySelector('.container');
         containerDiv.style.display = 'none';
 
-        // Hide the spinner overlay if visible
         const spinnerOverlay = document.getElementById('spinner-overlay');
         if (spinnerOverlay) {
             spinnerOverlay.style.display = 'none';
         }
 
-        // Show the order details page
         const orderDetailsPage = document.getElementById('order-details-page');
         orderDetailsPage.style.display = 'block';
 
-        // Populate the order details page
-        populateOrderDetails();
+        populateOrderDetails(); // Ensure this function is called here
 
-        // Scroll to the top of the order details page
         window.scrollTo(0, 0);
     }
 
     function populateOrderDetails() {
-        // Set order date
         const orderDate = new Date().toLocaleDateString();
         document.getElementById('order-date').innerText = orderDate;
 
-        // Get billing address content
+        // Populate Billing Address
         const billingContentHTML = document.querySelector('.billing-address .billing-content').innerHTML;
-
-        // Set billing address content in order details page
         document.querySelector('#order-details-page .billing-address .billing-content').innerHTML = billingContentHTML;
 
-        // Get shipping address content
+        // Populate Shipping Address
         const shippingContentHTML = document.querySelector('.shipping-address .shipping-content').innerHTML;
-
-        // Set shipping address content in order details page
         document.querySelector('#order-details-page .shipping-address .shipping-content').innerHTML = shippingContentHTML;
 
-        // Get cart items content
+        // Populate Cart Items
         const cartItemsDiv = document.querySelector('.cart-items');
-
-        // Clone the cart items content
         const cartItemsContent = cartItemsDiv.innerHTML;
 
-        // Remove the 'In Your Cart' header and 'Edit Cart' link
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = cartItemsContent;
         const cartHeader = tempDiv.querySelector('h4');
@@ -2758,33 +2895,132 @@ function applyPromoCode(promoInputId, summarySectionId) {
         const editCartLink = tempDiv.querySelector('.edit-cart');
         if (editCartLink) editCartLink.remove();
 
-        // Set the items in the order items list
         const orderItemsListDiv = document.querySelector('#order-details-page .order-items .order-items-list');
         orderItemsListDiv.innerHTML = tempDiv.innerHTML;
 
-        // Remove duplicate IDs in order details page
         orderItemsListDiv.querySelectorAll('[id]').forEach(el => {
             el.removeAttribute('id');
         });
 
-        // Get financial summary content
+        // Populate Order Summary
         const summaryDiv = document.querySelector('.order-summary');
-
-        // Clone the summary content
         const summaryContent = summaryDiv.innerHTML;
-
-        // Set the financial summary in order details page
         const orderSummaryDiv = document.querySelector('#order-details-page .order-summary');
         orderSummaryDiv.innerHTML = summaryContent;
 
-        // Remove duplicate IDs in order details page
         orderSummaryDiv.querySelectorAll('[id]').forEach(el => {
             el.removeAttribute('id');
         });
+
+        // Populate Payment Details
+        const paymentContentDiv = document.querySelector('#order-details-page .payment-details .payment-content');
+
+        // Retrieve values from both forms
+        const poNumberPO = document.getElementById('purchase-order-number').value.trim();
+        const orderedByPO = document.getElementById('ordered-by').value.trim();
+
+        const poNumberCC = document.getElementById('credit-purchase-order-number').value.trim();
+        const cardHolderName = document.getElementById('card-holder-name').value.trim();
+
+        // Initialize Payment Details HTML
+        let paymentDetailsHTML = '';
+
+        // Check which form is active and append relevant details
+        if (document.getElementById('purchase-order-form').style.display !== 'none') {
+            paymentDetailsHTML += `
+                <p><strong>Payment Method:</strong> Purchase Order</p>
+                <p><strong>Purchase Order Number:</strong> ${poNumberPO}</p>
+                <p><strong>Ordered By:</strong> ${orderedByPO}</p>
+            `;
+        }
+
+        if (document.getElementById('credit-card-form').style.display !== 'none') {
+            const cardNumber = document.getElementById('card-number').value.trim();
+            const lastFour = cardNumber.slice(-4);
+            paymentDetailsHTML += `
+                <p><strong>Payment Method:</strong> Credit Card</p>
+                <p><strong>Card Holder Name:</strong> ${cardHolderName}</p>
+                <p><strong>Card Number:</strong> **** **** **** ${lastFour}</p>
+            `;
+
+            // Include Purchase Order Number if entered in Credit Card Form
+            if (poNumberCC) {
+                paymentDetailsHTML += `
+                    <p><strong>Purchase Order Number:</strong> ${poNumberCC}</p>
+                `;
+            }
+        }
+
+        if (!paymentDetailsHTML) {
+            paymentDetailsHTML = `
+                <p><strong>Payment Method:</strong> Not Specified</p>
+            `;
+        }
+
+        paymentContentDiv.innerHTML = paymentDetailsHTML;
+
+        // Populate Shipping Details Summary
+        const shippingSummaryCollapsed = document.getElementById('shipping-summary-collapsed');
+        const shippingDetailsExpanded = document.getElementById('shipping-details-expanded');
+
+        if (shippingDetails && shippingDetails.shippingType) {
+            let partialInfo = '';
+            let fullInfo = '';
+
+            if (shippingDetails.shippingType === 'Prepay & Add') {
+                partialInfo = `<strong>Shipping Method: ${shippingDetails.shippingMethod}</strong>`;
+                fullInfo = `
+                    <p><strong>Shipping Type:</strong> ${shippingDetails.shippingType}</p>
+                    <p><strong>Shipping Method:</strong> ${shippingDetails.shippingMethod}</p>
+                    ${shippingDetails.orderNotes ? `<p><strong>Order Notes:</strong> ${shippingDetails.orderNotes}</p>` : ''}
+                `;
+            } else if (shippingDetails.shippingType === 'Collect') {
+                partialInfo = `<strong>UPS Account: ${shippingDetails.upsAccountNumber}</strong>`;
+                fullInfo = `
+                    <p><strong>Shipping Type:</strong> ${shippingDetails.shippingType}</p>
+                    <p><strong>Shipping Method:</strong> ${shippingDetails.shippingMethod}</p>
+                    <p><strong>UPS Account Number:</strong> ${shippingDetails.upsAccountNumber}</p>
+                    <p><strong>Contact Name:</strong> ${shippingDetails.contactName}</p>
+                    <p><strong>Contact Number:</strong> ${shippingDetails.contactNumber}</p>
+                    ${shippingDetails.orderNotes ? `<p><strong>Order Notes:</strong> ${shippingDetails.orderNotes}</p>` : ''}
+                `;
+            } else if (shippingDetails.shippingType === 'LTL Collect') {
+                partialInfo = `<strong>Courier: ${shippingDetails.courierName}</strong>`;
+                fullInfo = `
+                    <p><strong>Shipping Type:</strong> ${shippingDetails.shippingType}</p>
+                    <p><strong>Courier Name:</strong> ${shippingDetails.courierName}</p>
+                    <p><strong>Courier Account Number:</strong> ${shippingDetails.courierAccountNumber}</p>
+                    <p><strong>Contact Name:</strong> ${shippingDetails.contactName}</p>
+                    <p><strong>Contact Number:</strong> ${shippingDetails.contactNumber}</p>
+                    ${shippingDetails.orderNotes ? `<p><strong>Order Notes:</strong> ${shippingDetails.orderNotes}</p>` : ''}
+                `;
+            }
+
+            shippingSummaryCollapsed.innerHTML = partialInfo;
+            shippingDetailsExpanded.innerHTML = fullInfo;
+        } else {
+            shippingSummaryCollapsed.innerHTML = 'No shipping details available.';
+            shippingDetailsExpanded.innerHTML = '';
+        }
+
+        document.getElementById('expand-shipping-details-btn').addEventListener('click', function() {
+            const expandedDiv = document.getElementById('shipping-details-expanded');
+            const isExpanded = expandedDiv.classList.contains('expanded');
+            
+            if (!isExpanded) {
+                expandedDiv.classList.add('expanded');
+                this.textContent = 'Collapse';
+                this.setAttribute('aria-expanded', 'true');
+            } else {
+                expandedDiv.classList.remove('expanded');
+                this.textContent = 'Expand';
+                this.setAttribute('aria-expanded', 'false');
+            }
+        });
     }
 
+
     function printOrderDetails() {
-        // Hide other page content before printing
         const containerDiv = document.querySelector('.container');
         const orderDetailsPage = document.getElementById('order-details-page');
         const originalDisplay = containerDiv.style.display;
