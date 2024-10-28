@@ -200,7 +200,7 @@
             font-size: 12px;
             text-align: center;
             cursor: pointer;
-            height: 140px; /* Adjust as needed */
+            height: 140px;
         }
 
 
@@ -208,9 +208,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px dashed #53748A;
+            border: 1px dashed #B4C8D5;
             border-radius: 4px;
-            height: 100%; /* Ensures it matches the height of other address options */
+            height: 100%; 
             cursor: pointer;
         }
 
@@ -232,14 +232,14 @@
         }
 
         .edit-btn:hover {
-            background-color: #53748A;
+            background-color: #B4C8D5;
         }
 
 
         #add-new-address {
             padding: 40px;
-            border: 1px dashed #53748A;
-            color: #53748A;
+            border: 1px dashed #B4C8D5;
+            color: #B4C8D5;
             background-color: white;
             text-align: center;
             cursor: pointer;
@@ -251,8 +251,7 @@
         .summary-content {
             margin-bottom: 15px;
             margin-top: 15px;
-            border-bottom: 1px solid #053856;
-            border-top: 1px solid #053856;
+            border-bottom: 1px solid #212121;
         }
 
         .summary-content p span {
@@ -261,18 +260,19 @@
 
         .summary-content-2 p span {
             float: right;
+            font-size: 16px;
         }
+
 
         .cart-item {
             padding: 10px 0;
             border-bottom: 1px solid #053856;
-            border-top: 1px solid #053856;
         }
 
         .edit-cart {
             float: right;
             font-size: 12px;
-            color: #53748A;
+            color: #B4C8D5;
         }
 
         .form-footer {
@@ -458,6 +458,25 @@
             width: 100%;
         }
 
+        h4 {
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        h4::after {
+            content: "";
+            display: block;
+            height: 1px;
+            background-color: #212121;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+
         .button-group {
             display: flex;
             gap: 10px;
@@ -555,7 +574,7 @@ text-align: center;
 }
 
 .modal-btn-y:hover {
-background-color: #53748A;
+background-color: #B4C8D5;
 }
 
 .cancel-btn {
@@ -606,7 +625,7 @@ background-color: #8A3536;
 }
 
 .step-number.completed {
-    background-color: #53748A;
+    background-color: #B4C8D5;
     color: white;
 }
 
@@ -709,7 +728,7 @@ background-color: #8A3536;
         }
 
         .terms-modal-footer button:hover {
-            background-color: #53748A;
+            background-color: #B4C8D5;
         }
 
         @media (max-width: 600px) {
@@ -729,6 +748,33 @@ background-color: #8A3536;
                 width: 100%;
                 text-align: center;
             }
+        }
+
+        .spinner-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 200; 
+        }
+
+        .spinner {
+            border: 12px solid #f3f3f3;
+            border-top: 12px solid #053856;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .terms-accordion-input {
@@ -804,7 +850,7 @@ background-color: #8A3536;
         }
 
         .new-address-form input:focus {
-            border-color: #53748A;
+            border-color: #B4C8D5;
             outline: none;
         }
 
@@ -832,8 +878,26 @@ background-color: #8A3536;
         }
         #order-confirmation {
             display: none; 
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            display: flex; 
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 300; 
             text-align: center;
             padding: 50px;
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        #order-confirmation.show {
+            opacity: 1;
         }
 
         #order-confirmation h2 {
@@ -856,7 +920,7 @@ background-color: #8A3536;
         }
 
         #order-confirmation button:hover {
-            background-color: #53748A;
+            background-color: #B4C8D5;
         }
 
 
@@ -877,7 +941,7 @@ background-color: #8A3536;
         }
 
         .terms-conditions-section a {
-            color: #53748A;
+            color: #B4C8D5;
             text-decoration: none;
         }
 
@@ -901,13 +965,77 @@ background-color: #8A3536;
         }
 
         .terms-checkbox a {
-            color: #53748A;
+            color: #B4C8D5;
             text-decoration: none;
         }
 
         .terms-checkbox a:hover {
             text-decoration: underline;
         }
+
+        .payment-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+
+
+        .promo-container {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+ 
+        .promo-toggle {
+            background-color: transparent;
+            border: 1px solid #053856;
+            color: #053856;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 4px;
+            width: fit-content; 
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+
+        .promo-toggle:hover {
+            background-color: #053856;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .promo-code-field {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+
+        .promo-code-field input {
+            margin-top: 10px;
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+
+        .promo-code-field input:focus {
+            border-color: #B4C8D5;
+            outline: none;
+        }
+
 
         .back-btn {
             padding: 10px 20px;
@@ -939,7 +1067,7 @@ background-color: #8A3536;
         }
 
         .continue-btn:hover, .single-continue-btn, .place-order-btn:hover {
-            background-color: #53748A;
+            background-color: #B4C8D5;
         }
 
         .shipping-address h3 {
@@ -1033,6 +1161,153 @@ background-color: #8A3536;
             font-weight: bold;
         }
 
+        #order-details-page {
+            display: none;
+            padding: 20px;
+            background-color: #ffffff;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            overflow: auto;
+        }
+        .order-details-container {
+            max-width: 650px;
+            margin: 10px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: #f9f9f9;
+        }
+
+        .order-details-container h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #053856;
+            font-size: 18px;
+        }
+
+        .order-details-container p {
+            font-size: 11px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .address-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .address-section .billing-address,
+        .address-section .shipping-address {
+            width: 48%;
+            font-size: 12px;
+            line-height: 1;
+        }
+
+        .address-section h4 {
+            margin-bottom: 3px;
+            color: #053856;
+            font-size: 14px;
+        }
+
+        .order-items {
+            margin-bottom: 10px;
+        }
+
+        .order-items h4 {
+            margin-bottom: 5px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 3px;
+            color: #053856;
+            font-size: 14px;
+        }
+
+        .order-items .order-items-list .cart-item {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .order-items .cart-item img {
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .order-items .cart-item div {
+            font-size: 11px; 
+        }
+
+        .order-summary h4 {
+            margin-bottom: 5px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 3px;
+            color: #053856;
+            font-size: 14px;
+        }
+
+
+        .order-buttons {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .order-buttons button {
+            padding: 6px 12px;
+            background-color: #053856;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0 3px;
+            font-size: 12px;
+        }
+
+        .order-buttons button:hover {
+            background-color: #B4C8D5;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .order-details-container {
+                padding: 10px;
+            }
+
+            .order-details-container h2 {
+                font-size: 22px;
+            }
+
+            .order-details-container p {
+                font-size: 13px;
+            }
+
+            .address-section {
+                flex-direction: column;
+            }
+
+            .address-section .billing-address,
+            .address-section .shipping-address {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .order-items h4,
+            .order-summary h4 {
+                font-size: 16px;
+            }
+
+            .order-items .order-items-list .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .order-items .order-items-list .cart-item img {
+                margin-bottom: 5px;
+            }
 
 
     </style>
@@ -1076,7 +1351,7 @@ background-color: #8A3536;
 
                     <div class="address-search">
                         <input type="text" id="search-address" placeholder="Enter name, address, city" aria-label="Search Address">
-                        <span id="search-button">🔍</span>
+                        <span id="search-button">🔎︎</span>
                     </div>
 
                     <h5>Select Shipping Address</h5> <!-- Changed label for clarity -->
@@ -1194,6 +1469,13 @@ background-color: #8A3536;
                 <p>Note: Tax and Freight will be finalized at the time of shipping.</p>
             </div>
 
+            <div class="promo-container">
+                <button type="button" class="promo-toggle">Promo Code</button>
+                <div class="promo-code-field" style="display: none;">
+                    <input type="text" id="promo-code" placeholder="Enter Promo Code">
+                </div>
+            </div>
+
             <div class="terms-conditions-section">
                 <p>
                     By clicking the <strong>'Place Order'</strong> button, you confirm that you have read, understood, 
@@ -1220,17 +1502,15 @@ background-color: #8A3536;
         </div>
     </div>
 
-    <!-- Summary Section -->
     <div class="summary-section">
         <div class="address-container">
             <div class="billing-address border-box">
                 <h4>Billing Address</h4>
                 <div class="billing-content">
                     <!-- Fixed Billing Address -->
-                    <p>DEBRA-KUEMPEL</p>
+                    <p><strong>DEBRA-KUEMPEL</strong></p>
                     <p>3976 SOUTHERN AVE</p>
                     <p>CINCINNATI, OH 45227</p>
-                    <p>555-123-4567</p>
                 </div>
             </div>
 
@@ -1238,10 +1518,9 @@ background-color: #8A3536;
                 <h4>Shipping Address</h4>
                 <div class="shipping-content">
                     <!-- Dynamic Shipping Address -->
-                    <p>DEBRA-KUEMPEL</p>
+                    <p><strong>DEBRA-KUEMPEL</strong></p>
                     <p>3976 SOUTHERN AVE</p>
                     <p>CINCINNATI, OH 45227</p>
-                    <p>555-123-4567</p>
                 </div>
             </div>
         </div>
@@ -1253,6 +1532,8 @@ background-color: #8A3536;
                 <p><strong>Subtotal: <span>$40.72</span></strong></p>
                 <p><strong>Shipping: <span id="shipping-cost">TBD</span></strong></p>
                 <p><strong>Tax: <span id="tax-cost">TBD</span></strong></p>
+
+                <p id="discount-row" style="display: none;"><strong>DISCOUNT: <span id="discount-amount">-$10.00</span></strong></p>
             </div>
             <div class="summary-content-2">
                 <p><strong>Total: <span id="total-cost">TBD</span></strong></p>
@@ -1287,9 +1568,8 @@ background-color: #8A3536;
     </div>
 </div>
 
-<!-- The Modal (moved outside the container) -->
+
 <div id="terms-modal" class="modal terms-modal-wrapper">
-    <!-- [Existing Terms Modal Content Remains Unchanged] -->
 </div>
 
 <div id="new-address-modal" class="modal">
@@ -1340,10 +1620,10 @@ background-color: #8A3536;
                 <div class="save-address-text">Save Address?</div>
                 <div class="save-address-options">
                     <label>
-                        <input type="radio" name="save-address" value="yes"> Yes
+                        <input type="radio" name="save-address" value="yes" checked> Yes
                     </label>
                     <label>
-                        <input type="radio" name="save-address" value="no" checked> No
+                        <input type="radio" name="save-address" value="no"> No
                     </label>
                 </div>
             </div>
@@ -1355,6 +1635,64 @@ background-color: #8A3536;
         </div>
     </div>
 </div>
+<div id="order-confirmation" style="display: none;">
+    <h2>Order Successful!</h2>
+    <p>Your order has been placed successfully.</p>
+    <button onclick="showOrderDetails()">Continue to Order Details</button>
+</div>
+
+<!-- Order Details Page -->
+<div id="order-details-page" style="display: none;">
+    <div class="order-details-container">
+        <h2>Order Details</h2>
+        <p><strong>Order Number:</strong> <span id="order-number">1445678-00</span></p>
+        <p><strong>Order Date:</strong> <span id="order-date"></span></p>
+
+        <!-- Addresses -->
+        <div class="address-section">
+            <div class="billing-address">
+                <h4>Billing Address</h4>
+                <div class="billing-content">
+                    <!-- Billing address content will be populated here -->
+                </div>
+            </div>
+            <div class="shipping-address">
+                <h4>Shipping Address</h4>
+                <div class="shipping-content">
+                    <!-- Shipping address content will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Items -->
+        <div class="order-items">
+            <h4>Items Ordered</h4>
+            <div class="order-items-list">
+                <!-- Items will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="order-summary">
+            <h4>Order Summary</h4>
+            <div class="summary-content">
+                <!-- Financial summary will be populated here -->
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="order-buttons">
+            <button onclick="printOrderDetails()">Print</button>
+            <button onclick="continueShopping()">Continue Shopping</button>
+        </div>
+    </div>
+</div>
+
+<!-- Spinner Overlay -->
+<div id="spinner-overlay" class="spinner-overlay" style="display: none;">
+    <div class="spinner"></div>
+</div>
+
 
 
 
@@ -1464,22 +1802,37 @@ document.addEventListener("DOMContentLoaded", function () {
     
     populateMainAddressList(currentPageMain);
     setupMainPagination();
+    setupPromoCodeToggles();
+    applyPromoCode('promo-code', 'total-cost');
+
+    precheckDefaultAddress();
 
     document.getElementById('add-new-address').addEventListener('click', (e) => {
         e.preventDefault();
         openNewAddressModal();
     });
 
+    function precheckDefaultAddress() {
+        // Select the radio button with id 'address1-main'
+        const defaultAddressRadio = document.querySelector('input[name="shipping-address-main"][id="address1-main"]');
+        
+        if (defaultAddressRadio) {
+            defaultAddressRadio.checked = true; // Check the radio button
+            updateShippingAddress(defaultAddressRadio.value); // Update the shipping address display (if applicable)
+        } else {
+            console.warn("Default address radio button not found.");
+        }
+    }
+
 
     function updateShippingAddress(address) {
         const shippingContent = document.querySelector('.shipping-content');
-        const [name, street, cityStateZip, phone] = address.split(',');
+        const [name, street, city, state, zip, phone] = address.split('|');
 
         shippingContent.innerHTML = `
-            <p>${name.trim()}</p>
+            <p><strong>${name.trim()}</strong></p>
             <p>${street.trim()}</p>
-            <p>${cityStateZip.trim()}</p>
-            <p>Phone: ${phone.trim()}</p>
+            <p>${city.trim()}, ${state.trim()} ${zip.trim()}</p>
         `;
     }
     document.querySelector('.cancel-btn').addEventListener('click', function(e) {
@@ -1557,17 +1910,17 @@ document.addEventListener("DOMContentLoaded", function () {
             savedAddressOption.className = 'address-option saved-address-option';
 
             const formattedLabel = `
-                ${address.name}<br>
+                <strong>${address.name}</strong><br>
                 ${address.street}<br>
                 ${address.city}, ${address.state} ${address.zip}<br>
-                Phone: ${address.phone}
+                <!-- Phone number is omitted from display -->
             `;
 
             const savedRadioInput = document.createElement('input');
             savedRadioInput.type = 'radio';
             savedRadioInput.id = address.id;
-            savedRadioInput.name = 'shipping-address-modal'; // **Changed name here**
-            savedRadioInput.value = `${address.name}, ${address.street}, ${address.city}, ${address.state} ${address.zip}, ${address.phone}`;
+            savedRadioInput.name = 'shipping-address-modal';
+            savedRadioInput.value = `${address.name}|${address.street}|${address.city}|${address.state}|${address.zip}|${address.phone}`;
             savedRadioInput.setAttribute('aria-label', 'Select Address');
 
             const savedLabel = document.createElement('label');
@@ -1596,11 +1949,12 @@ document.addEventListener("DOMContentLoaded", function () {
             savedAddressesList.appendChild(savedAddressOption);
         });
 
-        // **Attach event listeners to the newly created radio buttons**
         document.querySelectorAll('input[name="shipping-address-modal"]').forEach(radio => {
             radio.addEventListener('change', function() {
                 const selectedAddress = this.value;
-                updateShippingAddress(selectedAddress); 
+                const addressParts = selectedAddress.split('|');
+                const addressWithoutPhone = addressParts.slice(0, -1).join('|');
+                updateShippingAddress(addressWithoutPhone); 
             });
         });
     }
@@ -1608,7 +1962,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function populateMainAddressList(page = 1) {
         console.log(`Populating main address list for page ${page}`);
         const mainAddressList = document.getElementById('main-address-list');
-        // Remove all address-options except the add-address-option
         mainAddressList.querySelectorAll('.address-option').forEach(option => option.remove());
 
         const start = (page - 1) * addressesPerPageMain;
@@ -1621,17 +1974,17 @@ document.addEventListener("DOMContentLoaded", function () {
             addressOption.className = 'address-option';
 
             const formattedLabel = `
-                ${address.name}<br>
+                <strong>${address.name}</strong><br>
                 ${address.street}<br>
                 ${address.city}, ${address.state} ${address.zip}<br>
-                Phone: ${address.phone}
+                <!-- Phone number is omitted from display -->
             `;
 
             const radioInput = document.createElement('input');
             radioInput.type = 'radio';
-            radioInput.id = address.id + '-main'; // **Unique ID for main list**
-            radioInput.name = 'shipping-address-main'; // **Name consistent with main list handling**
-            radioInput.value = `${address.name}, ${address.street}, ${address.city}, ${address.state} ${address.zip}, ${address.phone}`;
+            radioInput.id = address.id + '-main';
+            radioInput.name = 'shipping-address-main'; 
+            radioInput.value = `${address.name}|${address.street}|${address.city}|${address.state}|${address.zip}|${address.phone}`;
             radioInput.setAttribute('aria-label', 'Select Address');
 
             const label = document.createElement('label');
@@ -1663,9 +2016,10 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll('input[name="shipping-address-main"]').forEach(radio => {
             radio.addEventListener('change', function() {
                 const selectedAddress = this.value;
-                updateShippingAddress(selectedAddress); 
+                const addressParts = selectedAddress.split('|');
+                const addressWithoutPhone = addressParts.slice(0, -1).join('|');
+                updateShippingAddress(addressWithoutPhone); 
 
-                // Proceed to next step
                 step = 2;
                 updateStepIndicatorUI(step);
                 document.getElementById('initial-shipping-section').style.display = 'none';
@@ -1677,16 +2031,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+
     function setupPagination() {
         console.log(`Setting up pagination for page ${currentPage}`);
         const paginationControls = document.getElementById('pagination-controls');
-        paginationControls.innerHTML = ''; // Clear existing controls
+        paginationControls.innerHTML = ''; 
 
         const totalPages = Math.ceil(addresses.length / addressesPerPage);
         console.log(`Total pages: ${totalPages}`);
 
 
-        // Page Numbers
         for (let i = 1; i <= totalPages; i++) {
             const pageButton = document.createElement('button');
             pageButton.type = 'button';
@@ -1726,13 +2080,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const totalPages = Math.ceil(addresses.length / addressesPerPageMain);
 
-        // Page Numbers
         for (let i = 1; i <= totalPages; i++) {
             const pageButton = document.createElement('button');
             pageButton.type = 'button';
             pageButton.textContent = i;
 
-            // Add 'active' class to the current page button
             if (i === currentPageMain) {
                 pageButton.classList.add('active');
             }
@@ -1740,7 +2092,7 @@ document.addEventListener("DOMContentLoaded", function () {
             pageButton.addEventListener('click', () => {
                 currentPageMain = i;
                 populateMainAddressList(currentPageMain);
-                setupMainPagination(); // Re-render pagination controls
+                setupMainPagination(); 
             });
             paginationControls.appendChild(pageButton);
         }
@@ -1757,10 +2109,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function addNewSavedAddress(address) {
-        // Assign a unique ID to the new address
         const newId = `address${addresses.length + 1}`;
 
-        // Create a new address object with consistent structure
         const newAddress = {
             id: newId,
             name: address.company,
@@ -1771,18 +2121,14 @@ document.addEventListener("DOMContentLoaded", function () {
             phone: address.phone
         };
 
-        // Add to the main addresses array
         addresses.push(newAddress);
 
-        // Update the saved addresses display
         populateSavedAddresses(currentPage);
         setupPagination();
 
-        // Update the main address list
         populateMainAddressList(currentPageMain);
         setupMainPagination();
 
-        // Optionally, navigate to the last page where the new address is added
         const totalPages = Math.ceil(addresses.length / addressesPerPageMain);
         if (currentPageMain < totalPages) {
             currentPageMain = totalPages;
@@ -1790,20 +2136,22 @@ document.addEventListener("DOMContentLoaded", function () {
             setupMainPagination();
         }
 
-        // Update the shipping address display
-        updateShippingAddress(`${newAddress.name}, ${newAddress.street}, ${newAddress.city}, ${newAddress.state} ${newAddress.zip}, ${newAddress.phone}`);
+        // Update shipping address without phone number
+        updateShippingAddress(`${newAddress.name}|${newAddress.street}|${newAddress.city}|${newAddress.state}|${newAddress.zip}`);
         closeModal('new-address-modal');
 
         console.log("New Address Added:", newAddress);
     }
-
     document.getElementById('submit-new-address-btn').addEventListener('click', function (e) {
         e.preventDefault();
 
         if (tabSavedAddressesButton.classList.contains('active')) {
             const selectedSavedAddress = document.querySelector('input[name="shipping-address-modal"]:checked');
             if (selectedSavedAddress) {
-                updateShippingAddress(selectedSavedAddress.value);
+                // Exclude phone number when updating shipping address
+                const addressParts = selectedSavedAddress.value.split('|');
+                const addressWithoutPhone = addressParts.slice(0, -1).join('|'); // Removes the phone part
+                updateShippingAddress(addressWithoutPhone);
                 step = 2;
                 updateStepIndicatorUI(step);
                 document.getElementById('initial-shipping-section').style.display = 'none';
@@ -1830,25 +2178,24 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             const formattedAddress = `
-                ${newAddress.company}, ${newAddress.line1}${newAddress.line2 ? ', ' + newAddress.line2 : ''}, ${newAddress.city}, ${newAddress.state} ${newAddress.zipcode}, ${newAddress.phone}
+                ${newAddress.company}|${newAddress.line1}${newAddress.line2 ? '|' + newAddress.line2 : ''}|${newAddress.city}|${newAddress.state}|${newAddress.zipcode}|${newAddress.phone}
             `;
 
             const displayLabel = `
                 ${newAddress.company}<br>
                 ${newAddress.line1}${newAddress.line2 ? '<br>' + newAddress.line2 : ''}<br>
                 ${newAddress.city}, ${newAddress.state} ${newAddress.zipcode}<br>
-                Phone: ${newAddress.phone}
+                <!-- Phone number is omitted from display -->
             `;
 
             const shippingContent = document.querySelector('.shipping-content');
             shippingContent.innerHTML = `
-                <p>${newAddress.company}</p>
+                <p><strong>${newAddress.company}</strong></p>
                 <p>${newAddress.line1}</p>
                 ${newAddress.line2 ? `<p>${newAddress.line2}</p>` : ''}
                 <p>${newAddress.city}, ${newAddress.state} ${newAddress.zipcode}</p>
-                <p>Phone: ${newAddress.phone}</p>
+                <!-- Phone number is omitted from display -->
             `;
-
 
             const saveAddress = document.querySelector('input[name="save-address"]:checked').value;
 
@@ -1890,10 +2237,33 @@ document.addEventListener("DOMContentLoaded", function () {
             alert('You must agree to the terms and conditions before placing your order.');
             event.preventDefault(); 
         } else {
-            alert('Order placed successfully!');
+            event.preventDefault(); // Prevent default form submission
+            showSpinner();
 
+            // Simulate a 2-second loading time
+            setTimeout(() => {
+                hideSpinner();
+                showOrderConfirmation();
+            }, 2000);
         }
     });
+
+    function showSpinner() {
+        document.getElementById('spinner-overlay').style.display = 'flex';
+    }
+
+    function hideSpinner() {
+        document.getElementById('spinner-overlay').style.display = 'none';
+    }
+
+    function showOrderConfirmation() {
+        console.log("showOrderConfirmation() called");
+        const confirmationDiv = document.getElementById('order-confirmation');
+        confirmationDiv.style.display = 'flex'; // Ensure it's displayed
+        setTimeout(() => {
+            confirmationDiv.classList.add('show');
+        }, 10); // Slight delay to trigger the transition
+    }
 
     document.getElementById('back-btn').addEventListener('click', function () {
         if (step === 2) {
@@ -1979,12 +2349,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-/* 
-    Removed:
-    - All functions and variables related to billing address updates based on shipping selection.
-    - Functionality that copies billing address to shipping address.
-*/
-
 
 
 function toggleShippingOptions() {
@@ -2004,8 +2368,8 @@ function toggleShippingOptions() {
 function processShippingOptions() {
     const shippingTypeElement = document.querySelector('input[name="shipping-type"]:checked');
     const shippingCostElement = document.getElementById('shipping-cost');
-    const taxElement = document.getElementById('tax-cost');  // Use specific ID for tax
-    const totalElement = document.getElementById('total-cost');  // Use specific ID for total
+    const taxElement = document.getElementById('tax-cost');  
+    const totalElement = document.getElementById('total-cost');  
 
     let shippingCost = 'TBD';
     let tax = 'TBD';
@@ -2020,13 +2384,13 @@ function processShippingOptions() {
                 alert('Please select a shipping method.');
                 return;
             }
-            shippingCost = '$15.00';  // Set cost for Prepay & Add
-            tax = '$3.34';            // Fixed tax for this option
-            total = '$59.06';          // Example calculation for total
+            shippingCost = '$15.00'; 
+            tax = '$3.34';        
+            total = '$59.06';       
         } else if (shippingType === 'collect' || shippingType === 'ltl') {
             shippingCost = 'Freight billed to collect account';
-            tax = '$2.44';            // Fixed tax
-            total = '$43.16';          // Example calculation for total
+            tax = '$2.44';    
+            total = '$43.16';        
         }
     }
 
@@ -2075,7 +2439,6 @@ function updateStepIndicatorUI(currentStep) {
 }
 
 function updateBackButtonVisibility() {
-    // Example Implementation:
     const backBtn = document.getElementById('back-btn');
     if (step === 1) {
         backBtn.style.display = 'none';
@@ -2085,9 +2448,9 @@ function updateBackButtonVisibility() {
 }
 
 function fetchAddressSuggestions() {
-    const query = document.getElementById('new-address-line1').value;
+    const query = document.getElementById('new-address-line1').value.trim();
     if (query.length < 3) {
-        document.getElementById('address-suggestions').style.display = 'none'; // Hide suggestions if input is too short
+        document.getElementById('address-suggestions').style.display = 'none'; 
         return;
     }
 
@@ -2096,31 +2459,92 @@ function fetchAddressSuggestions() {
     fetch(autocompleteUrl)
         .then(response => response.json())
         .then(data => {
+            console.log(data.items); // Log API response for debugging
             const suggestionsDiv = document.getElementById('address-suggestions');
             suggestionsDiv.innerHTML = ''; 
 
             if (data.items && data.items.length > 0) {
-                suggestionsDiv.style.display = 'block';  
+                // Define US state and territory codes
+                const US_STATES = [ 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
+                    'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
+                    'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
+                    'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
+                    'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY' ];
+                const US_TERRITORIES = ['AS', 'GU', 'MP', 'PR', 'VI', 'UM', 'DC'];
 
+                // Filter items to include only addresses in US states or territories and have a street address
                 const filteredItems = data.items.filter(item => {
-                    const fullAddress = item.address.label || '';
-                    return fullAddress.toLowerCase().startsWith(query.toLowerCase());
+                    const address = item.address;
+                    if (!address) return false;
+
+                    const stateCode = address.stateCode || '';
+                    const hasValidStreet = address.street && address.street.trim() !== '';
+
+                    const isUSState = US_STATES.includes(stateCode);
+                    const isUSTerritory = US_TERRITORIES.includes(stateCode);
+
+                    return (isUSState || isUSTerritory) && hasValidStreet;
                 });
 
-                const displayItems = filteredItems.length > 0 ? filteredItems : data.items;
+                if (filteredItems.length === 0) {
+                    suggestionsDiv.innerHTML = '<div class="suggestion">No valid street address suggestions found</div>';
+                    suggestionsDiv.style.display = 'block'; 
+                    return;
+                }
 
+                // Extract numeric part of the query
+                const queryNumberMatch = query.match(/\d+/);
+                const queryNumberStr = queryNumberMatch ? queryNumberMatch[0] : '';
+
+                // Assign priority to each item
+                filteredItems.forEach(item => {
+                    const address = item.address;
+                    const houseNumber = address.houseNumber || '';
+                    const addressLabel = address.label || '';
+                    item.priority = 0;
+
+                    // Prioritize based on house number match
+                    if (houseNumber === queryNumberStr) {
+                        item.priority += 3; // Exact match
+                    } else if (houseNumber.startsWith(queryNumberStr)) {
+                        item.priority += 2; // Starts with query number
+                    } else if (houseNumber.includes(queryNumberStr)) {
+                        item.priority += 1; // Contains query number
+                    }
+
+                    // Prioritize if the address label starts with the house number
+                    if (addressLabel.startsWith(houseNumber)) {
+                        item.priority += 1;
+                    }
+
+                    // Prioritize US states over territories
+                    const stateCode = address.stateCode || '';
+                    if (US_STATES.includes(stateCode)) {
+                        item.priority += 1;
+                    }
+                });
+
+                // Sort items based on priority (optional)
+                filteredItems.sort((a, b) => b.priority - a.priority);
+
+                const displayItems = filteredItems.slice(0, 10);
+
+                suggestionsDiv.style.display = 'block';  
                 displayItems.forEach(suggestion => {
                     const fullAddress = suggestion.address.label;
 
                     const option = document.createElement('div');
                     option.className = 'suggestion';
-                    option.innerHTML = fullAddress; // Use innerHTML to allow <br> tags
+                    option.textContent = fullAddress;
 
                     option.onclick = () => {
-                        document.getElementById('new-address-line1').value = suggestion.address.houseNumber ? `${suggestion.address.houseNumber} ${suggestion.address.street}` : suggestion.address.street;
-                        document.getElementById('new-city').value = suggestion.address.city || '';
-                        document.getElementById('new-state').value = suggestion.address.stateCode || '';
-                        document.getElementById('new-zipcode').value = suggestion.address.postalCode || '';
+                        const address = suggestion.address;
+                        const street = address.street || '';
+                        const houseNumber = address.houseNumber || '';
+                        document.getElementById('new-address-line1').value = houseNumber ? `${houseNumber} ${street}` : street;
+                        document.getElementById('new-city').value = address.city || '';
+                        document.getElementById('new-state').value = address.stateCode || '';
+                        document.getElementById('new-zipcode').value = address.postalCode || '';
                         suggestionsDiv.innerHTML = ''; 
                         suggestionsDiv.style.display = 'none';
                     };
@@ -2133,10 +2557,13 @@ function fetchAddressSuggestions() {
         })
         .catch(error => {
             console.error('Error fetching address suggestions:', error);
-            document.getElementById('address-suggestions').innerHTML = '<div class="suggestion">Error fetching suggestions</div>';
-            document.getElementById('address-suggestions').style.display = 'block'; 
+            const suggestionsDiv = document.getElementById('address-suggestions');
+            suggestionsDiv.innerHTML = '<div class="suggestion">Error fetching suggestions</div>';
+            suggestionsDiv.style.display = 'block'; 
         });
 }
+
+
 
 document.getElementById('new-zipcode').addEventListener('input', function () {
     const zipcode = this.value;
@@ -2217,6 +2644,161 @@ document.querySelectorAll('.modal').forEach(modal => {
         }
     });
 });
+
+function setupPromoCodeToggles() {
+    const promoToggle = document.querySelector('.promo-toggle');
+    const promoField = document.querySelector('.promo-code-field');
+    
+    promoToggle.addEventListener('click', () => {
+        if (promoField.style.display === 'none' || promoField.style.display === '') {
+            promoField.style.display = 'block';
+        } else {
+            promoField.style.display = 'none';
+        }
+    });
+}
+
+function applyPromoCode(promoInputId, summarySectionId) {
+    const promoInput = document.getElementById(promoInputId);
+    const totalCostElement = document.getElementById(summarySectionId);
+    const discountRow = document.getElementById('discount-row');
+    const discountAmountElement = document.getElementById('discount-amount');
+
+    promoInput.addEventListener('blur', () => {
+        const promoCode = promoInput.value.trim().toUpperCase();
+        let currentTotal = parseFloat(totalCostElement.innerText.replace('$', ''));
+
+        if (isNaN(currentTotal)) {
+            alert('Cannot apply promo code at this time.');
+            return;
+        }
+
+        if (promoCode === 'DISCOUNT10') {
+            const discount = 10.00;
+
+            // Update discount amount and show the row
+            discountAmountElement.innerText = `-$${discount.toFixed(2)}`;
+            discountRow.style.display = 'block';
+
+            // Adjust the total
+            currentTotal -= discount;
+            if (currentTotal < 0) currentTotal = 0;
+            totalCostElement.innerText = `$${currentTotal.toFixed(2)}`;
+
+            alert('Promo code applied! $10 discount granted.');
+        } else if (promoCode !== '') {
+            alert('Invalid promo code.');
+        }
+    });
+}
+
+    function showOrderConfirmation() {
+        console.log("showOrderConfirmation() called");
+        const confirmationDiv = document.getElementById('order-confirmation');
+        confirmationDiv.style.display = 'flex'; // Ensure it's displayed
+        setTimeout(() => {
+            confirmationDiv.classList.add('show');
+        }, 10); // Slight delay to trigger the transition
+    }
+
+    function showOrderDetails() {
+        // Hide the order confirmation div
+        const confirmationDiv = document.getElementById('order-confirmation');
+        confirmationDiv.style.display = 'none';
+
+        // **Hide the main container**
+        const containerDiv = document.querySelector('.container');
+        containerDiv.style.display = 'none';
+
+        // Hide the spinner overlay if visible
+        const spinnerOverlay = document.getElementById('spinner-overlay');
+        if (spinnerOverlay) {
+            spinnerOverlay.style.display = 'none';
+        }
+
+        // Show the order details page
+        const orderDetailsPage = document.getElementById('order-details-page');
+        orderDetailsPage.style.display = 'block';
+
+        // Populate the order details page
+        populateOrderDetails();
+
+        // Scroll to the top of the order details page
+        window.scrollTo(0, 0);
+    }
+
+    function populateOrderDetails() {
+        // Set order date
+        const orderDate = new Date().toLocaleDateString();
+        document.getElementById('order-date').innerText = orderDate;
+
+        // Get billing address content
+        const billingContentHTML = document.querySelector('.billing-address .billing-content').innerHTML;
+
+        // Set billing address content in order details page
+        document.querySelector('#order-details-page .billing-address .billing-content').innerHTML = billingContentHTML;
+
+        // Get shipping address content
+        const shippingContentHTML = document.querySelector('.shipping-address .shipping-content').innerHTML;
+
+        // Set shipping address content in order details page
+        document.querySelector('#order-details-page .shipping-address .shipping-content').innerHTML = shippingContentHTML;
+
+        // Get cart items content
+        const cartItemsDiv = document.querySelector('.cart-items');
+
+        // Clone the cart items content
+        const cartItemsContent = cartItemsDiv.innerHTML;
+
+        // Remove the 'In Your Cart' header and 'Edit Cart' link
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = cartItemsContent;
+        const cartHeader = tempDiv.querySelector('h4');
+        if (cartHeader) cartHeader.remove();
+        const editCartLink = tempDiv.querySelector('.edit-cart');
+        if (editCartLink) editCartLink.remove();
+
+        // Set the items in the order items list
+        const orderItemsListDiv = document.querySelector('#order-details-page .order-items .order-items-list');
+        orderItemsListDiv.innerHTML = tempDiv.innerHTML;
+
+        // Remove duplicate IDs in order details page
+        orderItemsListDiv.querySelectorAll('[id]').forEach(el => {
+            el.removeAttribute('id');
+        });
+
+        // Get financial summary content
+        const summaryDiv = document.querySelector('.order-summary');
+
+        // Clone the summary content
+        const summaryContent = summaryDiv.innerHTML;
+
+        // Set the financial summary in order details page
+        const orderSummaryDiv = document.querySelector('#order-details-page .order-summary');
+        orderSummaryDiv.innerHTML = summaryContent;
+
+        // Remove duplicate IDs in order details page
+        orderSummaryDiv.querySelectorAll('[id]').forEach(el => {
+            el.removeAttribute('id');
+        });
+    }
+
+    function printOrderDetails() {
+        // Hide other page content before printing
+        const containerDiv = document.querySelector('.container');
+        const orderDetailsPage = document.getElementById('order-details-page');
+        const originalDisplay = containerDiv.style.display;
+
+        containerDiv.style.display = 'none';
+        window.print();
+        containerDiv.style.display = originalDisplay;
+    }
+
+function continueShopping() {
+
+    location.reload();
+}
+
 
 </script></body>
 </html>
