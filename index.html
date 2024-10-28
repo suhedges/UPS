@@ -22,7 +22,7 @@
         }
 
         .container {
-            transform: scale(0.7);
+            transform: scale(0.8);
             transform-origin: center top; 
             box-shadow: none;
 
@@ -99,7 +99,7 @@
         }
 
         .address-search {
-            margin-top: 20px;
+            margin-top: 50px;
             margin-bottom: 20px;
             position: relative;
             width: 100%;
@@ -127,33 +127,91 @@
             margin-top: 10px;
         }
 
+        .grid-2-columns {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 10px;
+            grid-auto-flow: dense; 
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .pagination button {
+            padding: 8px 12px;
+            background-color: #fff;
+            border: 1px solid #053856;
+            color: #053856;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination button:hover {
+            background-color: #053856;
+            color: #fff;
+        }
+
+        .pagination button.active {
+            background-color: #053856;
+            color: #fff;
+        }
+
+        .pagination button.disabled {
+            background-color: #f1f1f1;
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .saved-addresses-list {
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            flex-wrap: wrap; 
+            gap: 20px; 
+            min-height: 160px;
+        }
+
+        #address-suggestions {
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            width: 100%;
+            z-index: 1000;
+            border-radius: 4px;
+        }
+
         .address-option, .saved-address-option {
             display: flex;
             flex-direction: column;
-            justify-content: center; 
+            justify-content: space-between;
             align-items: center;
-            min-width: 160px;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
             background-color: #ffffff;
             font-size: 12px;
             text-align: center;
-            gap: 10px; 
             cursor: pointer;
+            height: 140px; /* Adjust as needed */
         }
 
 
         .add-address-option {
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 5px;
-            border: 1px solid #ccc;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed #53748A;
             border-radius: 4px;
-            background-color: #ffffff;
-            font-size: 12px;
-            text-align: center;
+            height: 100%; /* Ensures it matches the height of other address options */
+            cursor: pointer;
         }
 
         .address-option input, .saved-address-option input {
@@ -166,10 +224,11 @@
             background-color: #053856;
             color: white;
             cursor: pointer;
-            width: 80%; 
+            width: 50%; 
             text-align: center;
             border-radius: 4px;
             transition: background-color 0.3s ease; 
+            margin-top: 0px;
         }
 
         .edit-btn:hover {
@@ -185,6 +244,8 @@
             text-align: center;
             cursor: pointer;
             width: 100%;
+            height: 100%;
+
         }
 
         .summary-content {
@@ -228,19 +289,11 @@
             opacity: 1;
         }
 
-        .saved-addresses-list {
-            display: flex;
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically (optional) */
-    flex-wrap: wrap; /* Ensure multiple items wrap if they exceed the width */
-    gap: 20px; /* Optional: Add spacing between items */
-}
-
 
         .tab-container {
             display: flex;
             border-bottom: 2px solid #e0e0e0;
-            margin-bottom: 20px;
+            margin-top: 52px;
         }
 
         .tab-button {
@@ -327,6 +380,7 @@
             background-color: #fff;
             padding: 30px;
             border-radius: 12px;
+            height: 100%;
             width: calc(90% + 20px);
             max-width: calc(600px + 50px);
             width: calc(90% + 20px);
@@ -339,10 +393,10 @@
 
         @keyframes scaleDown {
             from {
-                transform: scale(.85);
+                transform: scale(0.7) translateY(100px);
             }
             to {
-                transform: scale(0.8);
+                transform: scale(0.65) translateY(130px);
             }
         }
 
@@ -399,16 +453,18 @@
         .modal-buttons {
             display: flex;
             flex-direction: column;
-            align-items: center; /* Center everything horizontally */
+            align-items: center; 
             gap: 20px;
             width: 100%;
         }
 
         .button-group {
             display: flex;
-            gap: 20px;
+            gap: 10px;
             justify-content: center;
-            width: 100%;
+            margin: 0 auto; 
+            margin-top: 50px; 
+            width: 50%;
         }
 
         .modal-btn {
@@ -445,7 +501,7 @@
 
 .save-address-options {
     display: flex;
-    gap: 10px; /* Space between Yes and No */
+    gap: 10px;
 }
 
 .save-address-text {
@@ -765,17 +821,6 @@ background-color: #8A3536;
         }
 
 
-        #address-suggestions {
-            position: absolute;
-            background-color: white;
-            border: 1px solid #ccc;
-            max-height: 150px;
-            overflow-y: auto;
-            width: 100%;
-            z-index: 1000;
-            border-radius: 4px;
-        }
-
         .suggestion {
             padding: 10px;
             cursor: pointer;
@@ -908,6 +953,86 @@ background-color: #8A3536;
             text-align: left; 
         }
 
+        .radio-container {
+            display: flex;
+            flex-direction: row; 
+            justify-content: center;
+            gap: 10px; 
+            padding: 10px; 
+            text-align: center; 
+            margin-top: 42px;
+        }
+
+        .full-width-divider {
+            width: 100%;
+            height: 1px;
+            background-color: #ccc;
+            margin: 20px 0;
+            box-sizing: border-box !important; 
+        }
+
+        #initial-shipping-section,
+        .shipping-address {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .address-list.grid-3-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .address-list.grid-3-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .full-width-divider::before {
+            content: "";
+            display: block;
+        }
+
+        #shipping-method {
+            width: 400px;
+            max-width: 650px;
+        }
+
+        #shipping-options {
+            width: 100%;
+            max-width: 400px; 
+            height: auto;
+            min-height: 150px;
+        }
+        #prepay-order-notes {
+            height: 200px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+
+        #ltl-order-notes {
+            height: 90px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+
+        #prepay-options p {
+            color: red;
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        #collect-options p {
+            color: red;
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
 
 
     </style>
@@ -947,6 +1072,8 @@ background-color: #8A3536;
                         <option value="pickup-vincennes-in" disabled>Pickup Vincennes, IN</option>
                     </select>
 
+                    <div class="full-width-divider"></div>
+
                     <div class="address-search">
                         <input type="text" id="search-address" placeholder="Enter name, address, city" aria-label="Search Address">
                         <span id="search-button">🔍</span>
@@ -954,38 +1081,36 @@ background-color: #8A3536;
 
                     <h5>Select Shipping Address</h5> <!-- Changed label for clarity -->
 
-                    <div class="address-list grid-3-columns">
+                    <!-- Updated Address List: Removed static address options -->
+                    <div class="address-list grid-3-columns" id="main-address-list">
                         <div class="add-address-option">
                             <button id="add-new-address">+ Add New Address</button>
                         </div>
-                        <div class="address-option">
-                            <input type="radio" id="address1" name="shipping-address" value="DEBRA-KUEMPEL, 3976 SOUTHERN AVE, CINCINNATI, OH 45227, Phone: 555-987-6543" aria-label="Select Address" checked>
-                            <label for="address1">DEBRA-KUEMPEL<br>3976 SOUTHERN AVE<br>CINCINNATI, OH 45227<br>Phone: 555-987-6543</label>
-                            <button class="edit-btn" aria-label="Edit Address">Edit</button>
-                        </div>
-                        <div class="address-option">
-                            <input type="radio" id="address2" name="shipping-address" value="ACME CORP, 156 MAIN ST, NOWHERE, IN 47612, Phone: 555-123-4567" aria-label="Select Address">
-                            <label for="address2">ACME CORP<br>156 MAIN ST<br>NOWHERE, IN 47612<br>Phone: 555-123-4567</label>
-                            <button class="edit-btn" aria-label="Edit Address">Edit</button>
-                        </div>
+                        <!-- Dynamic address-option divs will be inserted here -->
                     </div>
+                    <!-- Added Pagination Controls for Main Address List -->
+                    <div class="pagination" id="main-pagination-controls"></div>
                 </div>
             </div>
 
             <!-- Shipping Options (Initially Hidden) -->
             <div id="shipping-options" style="display: none;">
-                <label>
-                    <input type="radio" name="shipping-type" value="prepay" checked aria-label="Prepay and Add">
-                    Prepay & Add
-                </label>
-                <label>
-                    <input type="radio" name="shipping-type" value="collect" aria-label="Collect">
-                    Collect
-                </label>
-                <label>
-                    <input type="radio" name="shipping-type" value="ltl" aria-label="LTL Collect">
-                    LTL Collect
-                </label>
+                <div class="radio-container">
+                    <label>
+                        <input type="radio" name="shipping-type" value="prepay" checked aria-label="Prepay and Add">
+                        Prepay & Add
+                    </label>
+                    <label>
+                        <input type="radio" name="shipping-type" value="collect" aria-label="Collect">
+                        Collect
+                    </label>
+                    <label>
+                        <input type="radio" name="shipping-type" value="ltl" aria-label="LTL Collect">
+                        LTL Collect
+                    </label>
+                </div>
+
+                <div class="full-width-divider"></div>
 
                 <!-- Prepay & Add Options -->
                 <div id="prepay-options" class="shipping-detail">
@@ -1185,7 +1310,7 @@ background-color: #8A3536;
             <div class="new-address-form">
                 <input type="text" id="new-company-name" placeholder="Company Name *" required style="text-transform: uppercase;">
                 <div class="address-input-container" style="position: relative; width: 80%;">
-                    <input type="text" id="new-address-line1" placeholder="Address Line 1 *" required style="text-transform: uppercase;" oninput="fetchAddressSuggestions()">
+                    <input type="text" id="new-address-line1" placeholder="Address Line 1 *" required style="text-transform: uppercase;">
                     <div id="address-suggestions"></div>
                 </div>
                 <input type="text" id="new-address-line2" placeholder="Address Line 2" style="text-transform: uppercase;">
@@ -1202,6 +1327,10 @@ background-color: #8A3536;
             <h3>Select a Saved Address</h3>
             <div class="saved-addresses-list grid-3-columns">
                 <!-- Saved addresses will be dynamically inserted here -->
+            </div>
+            <!-- Pagination Controls -->
+            <div class="pagination" id="pagination-controls">
+                <!-- Pagination buttons will be dynamically inserted here -->
             </div>
         </div>
 
@@ -1231,8 +1360,12 @@ background-color: #8A3536;
 
 <script>
 let step = 1;
+let currentPage = 1;
+let currentPageMain = 1;
+const addressesPerPage = 4;
+const addressesPerPageMain = 2;
 
-const apiKey = 'UlDmrctKtA-knMSuNIJX7EhjvZLt1xquQjA8I2w8SYc';  // Define your API key at the top
+const apiKey = 'UlDmrctKtA-knMSuNIJX7EhjvZLt1xquQjA8I2w8SYc';
 
 const addresses = [
     {
@@ -1252,28 +1385,91 @@ const addresses = [
         state: 'IN',
         zip: '47612',
         phone: '555-123-4567'
+    },
+    {
+        id: 'address3',
+        name: 'GLOBAL TECH',
+        street: '789 BROADWAY',
+        city: 'NEW YORK',
+        state: 'NY',
+        zip: '10001',
+        phone: '555-234-5678'
+    },
+    {
+        id: 'address4',
+        name: 'FUTURE SOLUTIONS',
+        street: '321 MARKET ST',
+        city: 'SAN FRANCISCO',
+        state: 'CA',
+        zip: '94103',
+        phone: '555-345-6789'
+    },
+    {
+        id: 'address5',
+        name: 'OMEGA INDUSTRIES',
+        street: '654 OAK AVE',
+        city: 'CHICAGO',
+        state: 'IL',
+        zip: '60616',
+        phone: '555-456-7890'
+    },
+    {
+        id: 'address6',
+        name: 'ALPHA ENTERPRISES',
+        street: '987 PINE ST',
+        city: 'LOS ANGELES',
+        state: 'CA',
+        zip: '90001',
+        phone: '555-567-8901'
+    },
+    {
+        id: 'address7',
+        name: 'DELTA LLC',
+        street: '147 MAPLE DR',
+        city: 'HOUSTON',
+        state: 'TX',
+        zip: '77002',
+        phone: '555-678-9012'
+    },
+    {
+        id: 'address8',
+        name: 'SIGMA INC',
+        street: '258 SPRUCE RD',
+        city: 'DALLAS',
+        state: 'TX',
+        zip: '75201',
+        phone: '555-789-0123'
+    },
+    {
+        id: 'address9',
+        name: 'BETA LLC',
+        street: '369 BIRCH BLVD',
+        city: 'MIAMI',
+        state: 'FL',
+        zip: '33101',
+        phone: '555-890-1234'
+    },
+    {
+        id: 'address10',
+        name: 'GAMMA CORP',
+        street: '159 CEDAR LN',
+        city: 'ATLANTA',
+        state: 'GA',
+        zip: '30301',
+        phone: '555-901-2345'
     }
 ];
 
 document.addEventListener("DOMContentLoaded", function () {
+    
+    populateMainAddressList(currentPageMain);
+    setupMainPagination();
 
-    document.querySelectorAll('.address-option').forEach(option => {
-        option.addEventListener('click', function (event) {
-            const radioButton = this.querySelector('input[type="radio"]');
-
-            // Prevent selection if the Edit button is clicked
-            if (event.target.classList.contains('edit-btn')) {
-                event.stopPropagation();
-                return;
-            }
-
-            // Check the radio button and update the shipping address
-            if (radioButton) {
-                radioButton.checked = true;
-                updateShippingAddress(radioButton.value);
-            }
-        });
+    document.getElementById('add-new-address').addEventListener('click', (e) => {
+        e.preventDefault();
+        openNewAddressModal();
     });
+
 
     function updateShippingAddress(address) {
         const shippingContent = document.querySelector('.shipping-content');
@@ -1286,16 +1482,12 @@ document.addEventListener("DOMContentLoaded", function () {
             <p>Phone: ${phone.trim()}</p>
         `;
     }
-    // Event listener for the Cancel button in the new address modal
     document.querySelector('.cancel-btn').addEventListener('click', function(e) {
-        e.preventDefault(); // Prevents any default anchor behavior
+        e.preventDefault();
         closeModal('new-address-modal');
     });
 
 
-    // Set a fixed billing address (already set in HTML)
-
-    // Initialize shipping address based on the initially selected shipping address option
     const initialShippingRadio = document.querySelector('input[name="shipping-address"]:checked');
     if (initialShippingRadio) {
         updateShippingAddress(initialShippingRadio.value);
@@ -1303,64 +1495,67 @@ document.addEventListener("DOMContentLoaded", function () {
         console.warn("No shipping address is initially selected.");
     }
 
-    // Toggle shipping options based on selected shipping type
+
     toggleShippingOptions();
 
-    // Attach event listeners to shipping address radio buttons
     document.querySelectorAll('input[name="shipping-address"]').forEach(radio => {
         radio.addEventListener('change', function() {
-            const selectedAddress = this.value; // Fetch the value of the selected radio button
-            updateShippingAddress(selectedAddress); // Update the shipping address
+            const selectedAddress = this.value;
+            updateShippingAddress(selectedAddress); 
         });
     });
 
-    // Attach event listeners to shipping type radio buttons
     document.querySelectorAll('input[name="shipping-type"]').forEach(radio => {
         radio.addEventListener('change', function() {
-            toggleShippingOptions(); // Call the function to toggle shipping options
+            toggleShippingOptions();
         });
     });
 
-    // Tab Switching within New Address Modal
+    const newAddressLine1 = document.getElementById('new-address-line1');
+    if (newAddressLine1) {
+        newAddressLine1.addEventListener('input', fetchAddressSuggestions);
+    }
+
     const tabNewAddressButton = document.getElementById('tab-new-address');
     const tabSavedAddressesButton = document.getElementById('tab-saved-addresses');
     const tabNewAddressContent = document.getElementById('tab-new-address-content');
     const tabSavedAddressesContent = document.getElementById('tab-saved-addresses-content');
 
     tabNewAddressButton.addEventListener('click', function() {
-        // Activate NEW ADDRESS tab
         tabNewAddressButton.classList.add('active');
         tabSavedAddressesButton.classList.remove('active');
-        tabNewAddressContent.style.display = 'flex';  // Display new address content
-        tabSavedAddressesContent.style.display = 'none';  // Hide saved addresses content
+        tabNewAddressContent.style.display = 'flex';
+        tabSavedAddressesContent.style.display = 'none';
 
-        // Show "Save Address?" options only in NEW ADDRESS tab
         document.querySelector('.save-address-container').style.display = 'flex';
     });
 
     tabSavedAddressesButton.addEventListener('click', function() {
-        // Activate SAVED ADDRESSES tab
         tabSavedAddressesButton.classList.add('active');
         tabNewAddressButton.classList.remove('active');
-        tabSavedAddressesContent.style.display = 'flex';  // Display saved addresses content
-        tabNewAddressContent.style.display = 'none';  // Hide new address content
+        tabSavedAddressesContent.style.display = 'flex';
+        tabNewAddressContent.style.display = 'none'; 
 
-        // Hide "Save Address?" options in SAVED ADDRESSES tab
         document.querySelector('.save-address-container').style.display = 'none';
 
-        // Populate saved addresses list if switching to the Saved Addresses tab
-        populateSavedAddresses();
+        populateSavedAddresses(currentPage);
+        setupPagination();
     });
 
-    function populateSavedAddresses() {
-        const savedAddressesList = document.querySelector('.saved-addresses-list');
-        savedAddressesList.innerHTML = ''; // Clear existing content
+    function populateSavedAddresses(page = 1) {
+        console.log(`Populating saved addresses for page ${page}`);
+        const savedAddressesList = document.querySelector('#tab-saved-addresses-content .saved-addresses-list');
+        savedAddressesList.querySelectorAll('.saved-address-option').forEach(option => option.remove());
 
-        addresses.forEach(address => {
+        const start = (page - 1) * addressesPerPage;
+        const end = start + addressesPerPage;
+        const paginatedAddresses = addresses.slice(start, end);
+        console.log(`Displaying addresses ${start + 1} to ${Math.min(end, addresses.length)}`);
+
+        paginatedAddresses.forEach(address => {
             const savedAddressOption = document.createElement('div');
             savedAddressOption.className = 'address-option saved-address-option';
 
-            // Create a formatted label using individual address fields
             const formattedLabel = `
                 ${address.name}<br>
                 ${address.street}<br>
@@ -1371,7 +1566,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const savedRadioInput = document.createElement('input');
             savedRadioInput.type = 'radio';
             savedRadioInput.id = address.id;
-            savedRadioInput.name = 'shipping-address';
+            savedRadioInput.name = 'shipping-address-modal'; // **Changed name here**
             savedRadioInput.value = `${address.name}, ${address.street}, ${address.city}, ${address.state} ${address.zip}, ${address.phone}`;
             savedRadioInput.setAttribute('aria-label', 'Select Address');
 
@@ -1383,53 +1578,176 @@ document.addEventListener("DOMContentLoaded", function () {
             editButton.className = 'edit-btn';
             editButton.setAttribute('aria-label', 'Edit Address');
             editButton.textContent = 'Edit';
-            editButton.style.pointerEvents = 'all'; // Make sure clicks on this button don’t bubble up
+            editButton.style.pointerEvents = 'all'; 
             editButton.addEventListener('click', (event) => {
-                event.stopPropagation(); // Prevents the radio button from being selected on edit click
+                event.stopPropagation();
                 alert('Edit functionality is not implemented yet.');
             });
 
-            // Add event listener to make the whole savedAddressOption clickable
             savedAddressOption.addEventListener('click', function () {
-                savedRadioInput.checked = true; // Select the radio button
+                savedRadioInput.checked = true;
+                updateShippingAddress(savedRadioInput.value);
             });
 
-            // Append elements to the saved address option
             savedAddressOption.appendChild(savedRadioInput);
             savedAddressOption.appendChild(savedLabel);
             savedAddressOption.appendChild(editButton);
 
-            // Append the saved address option to the container
             savedAddressesList.appendChild(savedAddressOption);
+        });
+
+        // **Attach event listeners to the newly created radio buttons**
+        document.querySelectorAll('input[name="shipping-address-modal"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const selectedAddress = this.value;
+                updateShippingAddress(selectedAddress); 
+            });
+        });
+    }
+
+    function populateMainAddressList(page = 1) {
+        console.log(`Populating main address list for page ${page}`);
+        const mainAddressList = document.getElementById('main-address-list');
+        // Remove all address-options except the add-address-option
+        mainAddressList.querySelectorAll('.address-option').forEach(option => option.remove());
+
+        const start = (page - 1) * addressesPerPageMain;
+        const end = start + addressesPerPageMain;
+        const paginatedAddresses = addresses.slice(start, end);
+        console.log(`Displaying main addresses ${start + 1} to ${Math.min(end, addresses.length)}`);
+
+        paginatedAddresses.forEach(address => {
+            const addressOption = document.createElement('div');
+            addressOption.className = 'address-option';
+
+            const formattedLabel = `
+                ${address.name}<br>
+                ${address.street}<br>
+                ${address.city}, ${address.state} ${address.zip}<br>
+                Phone: ${address.phone}
+            `;
+
+            const radioInput = document.createElement('input');
+            radioInput.type = 'radio';
+            radioInput.id = address.id + '-main'; // **Unique ID for main list**
+            radioInput.name = 'shipping-address-main'; // **Name consistent with main list handling**
+            radioInput.value = `${address.name}, ${address.street}, ${address.city}, ${address.state} ${address.zip}, ${address.phone}`;
+            radioInput.setAttribute('aria-label', 'Select Address');
+
+            const label = document.createElement('label');
+            label.setAttribute('for', address.id + '-main');
+            label.innerHTML = formattedLabel;
+
+            const editButton = document.createElement('button');
+            editButton.className = 'edit-btn';
+            editButton.setAttribute('aria-label', 'Edit Address');
+            editButton.textContent = 'Edit';
+            editButton.style.pointerEvents = 'all'; 
+            editButton.addEventListener('click', (event) => {
+                event.stopPropagation();
+                alert('Edit functionality is not implemented yet.');
+            });
+
+            addressOption.addEventListener('click', function () {
+                radioInput.checked = true;
+                updateShippingAddress(radioInput.value);
+            });
+
+            addressOption.appendChild(radioInput);
+            addressOption.appendChild(label);
+            addressOption.appendChild(editButton);
+
+            mainAddressList.appendChild(addressOption);
+        });
+
+        document.querySelectorAll('input[name="shipping-address-main"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const selectedAddress = this.value;
+                updateShippingAddress(selectedAddress); 
+
+                // Proceed to next step
+                step = 2;
+                updateStepIndicatorUI(step);
+                document.getElementById('initial-shipping-section').style.display = 'none';
+                document.getElementById('shipping-options').style.display = 'block';
+                updateBackButtonVisibility();
+            });
         });
     }
 
 
-    // Function to close a modal by ID
+
+    function setupPagination() {
+        console.log(`Setting up pagination for page ${currentPage}`);
+        const paginationControls = document.getElementById('pagination-controls');
+        paginationControls.innerHTML = ''; // Clear existing controls
+
+        const totalPages = Math.ceil(addresses.length / addressesPerPage);
+        console.log(`Total pages: ${totalPages}`);
+
+
+        // Page Numbers
+        for (let i = 1; i <= totalPages; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.type = 'button';
+            pageButton.textContent = i;
+            if (i === currentPage) {
+                pageButton.classList.add('active');
+            }
+            pageButton.addEventListener('click', () => {
+                console.log(`Page ${i} button clicked`);
+                currentPage = i;
+                console.log(`Current page set to ${currentPage}`);
+                populateSavedAddresses(currentPage);
+                setupPagination();
+            });
+            paginationControls.appendChild(pageButton);
+        }
+
+    }
+
     function closeModal(modalId) {
         document.getElementById(modalId).style.display = 'none';
     }
 
-    // "Add New Address" button opens the new address modal
     document.getElementById('add-new-address').addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent default button behavior
+        e.preventDefault();
         openNewAddressModal();
     });
 
     function openNewAddressModal() {
         const modal = document.getElementById('new-address-modal');
         modal.style.display = 'flex';
-
-        // Activate NEW ADDRESS tab by default
-        tabNewAddressButton.classList.add('active');
-        tabSavedAddressesButton.classList.remove('active');
-        tabNewAddressContent.classList.add('active');
-        tabSavedAddressesContent.classList.remove('active');
-        tabNewAddressContent.style.display = 'flex';
-        tabSavedAddressesContent.style.display = 'none';
     }
 
-    // Close modal when clicking outside the modal content or on the close button
+    function setupMainPagination() {
+        const paginationControls = document.getElementById('main-pagination-controls');
+        paginationControls.innerHTML = '';
+
+        const totalPages = Math.ceil(addresses.length / addressesPerPageMain);
+
+        // Page Numbers
+        for (let i = 1; i <= totalPages; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.type = 'button';
+            pageButton.textContent = i;
+
+            // Add 'active' class to the current page button
+            if (i === currentPageMain) {
+                pageButton.classList.add('active');
+            }
+
+            pageButton.addEventListener('click', () => {
+                currentPageMain = i;
+                populateMainAddressList(currentPageMain);
+                setupMainPagination(); // Re-render pagination controls
+            });
+            paginationControls.appendChild(pageButton);
+        }
+    }
+
+
+
     document.querySelectorAll('.modal-close a').forEach(closeBtn => {
         closeBtn.addEventListener('click', function(e) {
             e.preventDefault();
@@ -1438,75 +1756,64 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Function to add a new address to the saved addresses list
     function addNewSavedAddress(address) {
-        // In a real application, you'd save this to a database or persistent storage
-        // For demonstration, we'll add it to the DOM
+        // Assign a unique ID to the new address
+        const newId = `address${addresses.length + 1}`;
 
-        const savedAddressesList = document.querySelector('.saved-addresses-list');
+        // Create a new address object with consistent structure
+        const newAddress = {
+            id: newId,
+            name: address.company,
+            street: address.line1,
+            city: address.city,
+            state: address.state,
+            zip: address.zipcode,
+            phone: address.phone
+        };
 
-        const addressOption = document.createElement('div');
-        addressOption.className = 'address-option';
+        // Add to the main addresses array
+        addresses.push(newAddress);
 
-        const radioInput = document.createElement('input');
-        radioInput.type = 'radio';
-        radioInput.id = `saved-address${savedAddressesList.children.length + 1}`;
-        radioInput.name = 'shipping-address'; // Changed to 'shipping-address'
-        radioInput.value = address.fullAddress;
-        radioInput.setAttribute('aria-label', 'Select Address');
+        // Update the saved addresses display
+        populateSavedAddresses(currentPage);
+        setupPagination();
 
-        const label = document.createElement('label');
-        label.setAttribute('for', `saved-address${savedAddressesList.children.length + 1}`);
-        label.innerHTML = address.displayLabel;
+        // Update the main address list
+        populateMainAddressList(currentPageMain);
+        setupMainPagination();
 
-        const editButton = document.createElement('button');
-        editButton.className = 'edit-btn';
-        editButton.setAttribute('aria-label', 'Edit Address');
-        editButton.textContent = 'Edit';
-        editButton.addEventListener('click', () => {
-            alert('Edit functionality is not implemented yet.');
-        });
+        // Optionally, navigate to the last page where the new address is added
+        const totalPages = Math.ceil(addresses.length / addressesPerPageMain);
+        if (currentPageMain < totalPages) {
+            currentPageMain = totalPages;
+            populateMainAddressList(currentPageMain);
+            setupMainPagination();
+        }
 
-        addressOption.appendChild(radioInput);
-        addressOption.appendChild(label);
-        addressOption.appendChild(editButton);
-
-        savedAddressesList.appendChild(addressOption);
-
-        // Optionally, select the newly added address
-        radioInput.checked = true;
-        updateShippingAddress(address.fullAddress);
+        // Update the shipping address display
+        updateShippingAddress(`${newAddress.name}, ${newAddress.street}, ${newAddress.city}, ${newAddress.state} ${newAddress.zip}, ${newAddress.phone}`);
         closeModal('new-address-modal');
 
-        console.log("New Address Added:", address.fullAddress);
+        console.log("New Address Added:", newAddress);
     }
 
-    // Existing event listener for "Continue" button in the new address modal
     document.getElementById('submit-new-address-btn').addEventListener('click', function (e) {
-        e.preventDefault();  // Prevent form submission
+        e.preventDefault();
 
-        // Check if the SAVED ADDRESSES tab is active
         if (tabSavedAddressesButton.classList.contains('active')) {
-            const selectedSavedAddress = document.querySelector('input[name="shipping-address"]:checked');
-            
+            const selectedSavedAddress = document.querySelector('input[name="shipping-address-modal"]:checked');
             if (selectedSavedAddress) {
-                // Update the shipping address content with the selected saved address
                 updateShippingAddress(selectedSavedAddress.value);
-
-                // Move to step 2
                 step = 2;
                 updateStepIndicatorUI(step);
                 document.getElementById('initial-shipping-section').style.display = 'none';
                 document.getElementById('shipping-options').style.display = 'block';
                 updateBackButtonVisibility();
-
-                // Close the modal
                 closeModal('new-address-modal');
             } else {
                 alert('Please select a saved address.');
             }
         } else {
-            // The existing functionality for adding a new address
             const newAddress = {
                 company: document.getElementById('new-company-name').value.trim(),
                 line1: document.getElementById('new-address-line1').value.trim(),
@@ -1517,13 +1824,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 phone: document.getElementById('new-phone').value.trim()
             };
 
-            // Validate required fields
             if (!newAddress.company || !newAddress.line1 || !newAddress.city || !newAddress.state || !newAddress.zipcode || !newAddress.phone) {
                 alert('Please fill in all required fields.');
                 return;
             }
 
-            // Create a formatted address string
             const formattedAddress = `
                 ${newAddress.company}, ${newAddress.line1}${newAddress.line2 ? ', ' + newAddress.line2 : ''}, ${newAddress.city}, ${newAddress.state} ${newAddress.zipcode}, ${newAddress.phone}
             `;
@@ -1535,7 +1840,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 Phone: ${newAddress.phone}
             `;
 
-            // Update the shipping address in the shipping-content section
             const shippingContent = document.querySelector('.shipping-content');
             shippingContent.innerHTML = `
                 <p>${newAddress.company}</p>
@@ -1545,21 +1849,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 <p>Phone: ${newAddress.phone}</p>
             `;
 
-            // Check if the user wants to save the address
+
             const saveAddress = document.querySelector('input[name="save-address"]:checked').value;
 
             if (saveAddress === 'yes') {
-                // Add to saved addresses
                 addNewSavedAddress({
-                    fullAddress: formattedAddress,
-                    displayLabel: displayLabel
+                    company: newAddress.company,
+                    line1: newAddress.line1,
+                    line2: newAddress.line2,
+                    city: newAddress.city,
+                    state: newAddress.state,
+                    zipcode: newAddress.zipcode,
+                    phone: newAddress.phone
                 });
             }
 
-            // Close the modal
             closeModal('new-address-modal');
 
-            // Move to the next step
             step = 2;
             updateStepIndicatorUI(step);
             document.getElementById('initial-shipping-section').style.display = 'none';
@@ -1568,7 +1874,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Attach event listeners to tab buttons
     ['purchase-order', 'credit-card'].forEach(tab => {
         document.getElementById(`tab-${tab}`).addEventListener('click', function() {
             document.getElementById(`${tab}-form`).style.display = 'flex';
@@ -1578,7 +1883,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Attach event listener to "Place Order" button
+
     document.getElementById('place-order-btn').addEventListener('click', function(event) {
         const termsCheckbox = document.getElementById('terms-checkbox');
         if (!termsCheckbox.checked) {
@@ -1586,12 +1891,10 @@ document.addEventListener("DOMContentLoaded", function () {
             event.preventDefault(); 
         } else {
             alert('Order placed successfully!');
-            // Here you can add further order processing logic
-            // Optionally, you can redirect or reset the form
+
         }
     });
 
-    // Attach event listener to "Back" button
     document.getElementById('back-btn').addEventListener('click', function () {
         if (step === 2) {
             step--;
@@ -1610,7 +1913,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    // Attach event listener to "Continue" button
     document.getElementById('single-continue-btn').addEventListener('click', function () {
         if (step === 1) {
             const shippingMethod = document.getElementById('shipping-method').value;
@@ -1620,7 +1922,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             if (shippingMethod === 'ship-to-me') {
-                // Directly proceed without confirmation
                 step++;
                 updateStepIndicatorUI(step);
                 document.getElementById('initial-shipping-section').style.display = 'none';
@@ -1647,7 +1948,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Attach event listeners to phone number inputs for formatting
     ['contact-number', 'courier-contact', 'new-phone'].forEach(id => {
         const inputElement = document.getElementById(id);
         if (inputElement) {
@@ -1657,7 +1957,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Attach event listeners to zipcode inputs to limit characters
     ['zipcode', 'courier-zipcode', 'new-zipcode'].forEach(id => {
         const inputElement = document.getElementById(id);
         if (inputElement) {
@@ -1667,7 +1966,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Attach event listener to expiration date input for formatting
     const expirationDateInput = document.getElementById('expiration-date');
     if (expirationDateInput) {
         expirationDateInput.addEventListener('input', function (e) {
@@ -1687,23 +1985,8 @@ document.addEventListener("DOMContentLoaded", function () {
     - Functionality that copies billing address to shipping address.
 */
 
-// Function to update the shipping address
-function updateShippingAddress(address) {
-    const shippingContent = document.querySelector('.shipping-content');
-    
-    // Split the address into separate parts based on commas
-    const [name, street, cityStateZip, phone] = address.split(',');
 
-    // Clear previous content and add each part in its own line
-    shippingContent.innerHTML = `
-        <p class="shipping-name">${name.trim()}</p>
-        <p class="shipping-street">${street.trim()}</p>
-        <p class="shipping-city-state-zip">${cityStateZip.trim()}</p>
-        <p class="shipping-phone">Phone: ${phone.trim()}</p>
-    `;
-}
 
-// Function to toggle shipping options based on selected shipping type
 function toggleShippingOptions() {
     const shippingType = document.querySelector('input[name="shipping-type"]:checked')?.value;
     if (!shippingType) return;
@@ -1718,19 +2001,16 @@ function toggleShippingOptions() {
     console.log("Shipping Options Toggled:", shippingType);
 }
 
-// Function to process shipping options and update the summary
 function processShippingOptions() {
     const shippingTypeElement = document.querySelector('input[name="shipping-type"]:checked');
     const shippingCostElement = document.getElementById('shipping-cost');
     const taxElement = document.getElementById('tax-cost');  // Use specific ID for tax
     const totalElement = document.getElementById('total-cost');  // Use specific ID for total
 
-    // Default values for TBD
     let shippingCost = 'TBD';
     let tax = 'TBD';
     let total = 'TBD';
 
-    // Check if a shipping option is selected
     if (shippingTypeElement) {
         const shippingType = shippingTypeElement.value;
 
@@ -1750,20 +2030,17 @@ function processShippingOptions() {
         }
     }
 
-    // Update summary content
     shippingCostElement.innerText = shippingCost;
     taxElement.innerText = tax;
     totalElement.innerText = total;
 
     console.log("Shipping Summary Updated:", { shippingCost, tax, total });
 
-    // Show relevant buttons and sections
     document.getElementById('single-continue-btn').style.display = 'none';
     document.getElementById('place-order-btn').style.display = 'block';
     document.getElementById('shipping-options').style.display = 'none';
     document.getElementById('payment-section').style.display = 'block';
 }
-// Function to format phone numbers
 function formatPhoneNumber(input) {
     let phone = input.value.replace(/\D/g, '');
     if (phone.length > 3 && phone.length <= 6) {
@@ -1775,7 +2052,6 @@ function formatPhoneNumber(input) {
     }
 }
 
-// Function to limit zipcode input to 5 characters
 function limitZipcode(input) {
     input.value = input.value.slice(0, 5);
 }
@@ -1808,7 +2084,6 @@ function updateBackButtonVisibility() {
     }
 }
 
-// Function to fetch address suggestions using HERE Autocomplete API
 function fetchAddressSuggestions() {
     const query = document.getElementById('new-address-line1').value;
     if (query.length < 3) {
@@ -1816,7 +2091,6 @@ function fetchAddressSuggestions() {
         return;
     }
 
-    // HERE Autocomplete API 
     const autocompleteUrl = `https://autocomplete.search.hereapi.com/v1/autocomplete?q=${encodeURIComponent(query)}&in=countryCode:USA&limit=10&apiKey=${apiKey}`;
 
     fetch(autocompleteUrl)
@@ -1864,7 +2138,6 @@ function fetchAddressSuggestions() {
         });
 }
 
-// Function to handle zipcode input for new address
 document.getElementById('new-zipcode').addEventListener('input', function () {
     const zipcode = this.value;
     if (zipcode.length === 5) {
@@ -1881,7 +2154,6 @@ document.getElementById('new-zipcode').addEventListener('input', function () {
     }
 });
 
-// Function to validate required fields in the current step
 function validateCurrentStep() {
     let isValid = true;
     let currentStepSection;
@@ -1894,11 +2166,9 @@ function validateCurrentStep() {
         currentStepSection = document.getElementById('payment-section');
     }
 
-    // Select all elements with the 'required' attribute within the current step
     const requiredElements = currentStepSection.querySelectorAll('[required]');
 
     requiredElements.forEach(element => {
-        // For select elements, ensure a valid option is selected
         if (element.tagName.toLowerCase() === 'select') {
             if (!element.value) {
                 isValid = false;
@@ -1907,7 +2177,6 @@ function validateCurrentStep() {
                 removeHighlight(element);
             }
         }
-        // For checkbox
         else if (element.type === 'checkbox') {
             if (!element.checked) {
                 isValid = false;
@@ -1916,7 +2185,6 @@ function validateCurrentStep() {
                 removeHighlight(element);
             }
         }
-        // For other input types
         else {
             if (!element.value.trim()) {
                 isValid = false;
@@ -1934,12 +2202,10 @@ function validateCurrentStep() {
     return isValid;
 }
 
-// Function to highlight invalid fields
 function highlightInvalidField(element) {
     element.style.borderColor = 'red';
 }
 
-// Function to remove highlight from valid fields
 function removeHighlight(element) {
     element.style.borderColor = '#ccc';
 }
