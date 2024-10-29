@@ -501,6 +501,25 @@
             }
         }
 
+.change-billing-container {
+    grid-column: 1 / -1;
+    text-align: left;
+    margin-top: 8px;
+    margin-left: 10px;
+}
+
+.clickable-text {
+    color: #053856;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+.clickable-text:hover {
+    color: #B4C8D5;
+}
+
+
 .save-address-container {
     display: flex;
     flex-direction: column;
@@ -1450,6 +1469,7 @@ background-color: #8A3536;
                     <div class="address-search">
                         <input type="text" id="search-address" placeholder="Enter name, address, city" aria-label="Search Address">
                         <span id="search-button">🔎︎</span>
+
                     </div>
 
                     <h5>Select Shipping Address</h5>
@@ -1458,8 +1478,14 @@ background-color: #8A3536;
                         <div class="add-address-option">
                             <button id="add-new-address">+ Add New Address</button>
                         </div>
+
+
+
                         <!-- Dynamic address-option -->
                     </div>
+                        <div class="change-billing-container">
+                            <span id="change-billing-address" class="clickable-text">Change Billing Address?</span>
+                        </div>
                     <!-- Pagin Controls -->
                     <div class="pagination" id="main-pagination-controls"></div>
                 </div>
@@ -3039,6 +3065,10 @@ function continueShopping() {
 
     location.reload();
 }
+
+document.getElementById('change-billing-address').addEventListener('click', function() {
+    alert('To make changes to a billing address, call 812-425-1336 or email customerservice@tristate-bearing.com');
+});
 
 
 </script></body>
