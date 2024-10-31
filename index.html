@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shipping Form</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
         * {
             margin: 0;
@@ -2729,16 +2727,21 @@ document.addEventListener("DOMContentLoaded", function () {
             updateStepIndicatorUI(step);
             document.getElementById('shipping-options').style.display = 'none';
             document.getElementById('initial-shipping-section').style.display = 'block';
+            document.getElementById('single-continue-btn').style.display = 'block';
+            document.getElementById('place-order-btn').style.display = 'none';
         } else if (step === 3) {
-            step--;
-            updateStepIndicatorUI(step);
-            document.getElementById('payment-section').style.display = 'none';
             if (selectedShippingMethod.startsWith('pickup-')) {
+                step = 1; 
+                updateStepIndicatorUI(step);
+                document.getElementById('payment-section').style.display = 'none';
                 document.getElementById('initial-shipping-section').style.display = 'block';
                 displayOrderNotesField(false);
                 document.getElementById('single-continue-btn').style.display = 'block';
                 document.getElementById('place-order-btn').style.display = 'none';
             } else {
+                step--;
+                updateStepIndicatorUI(step);
+                document.getElementById('payment-section').style.display = 'none';
                 document.getElementById('shipping-options').style.display = 'block';
                 document.getElementById('single-continue-btn').style.display = 'block';
                 document.getElementById('place-order-btn').style.display = 'none';
