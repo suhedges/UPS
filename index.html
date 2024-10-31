@@ -659,6 +659,12 @@ background-color: #8A3536;
     text-align: center;
 }
 
+.shipping-type-collect,
+.shipping-type-ltl {
+    display: none;
+}
+
+
         .product-container {
             display: flex;
             align-items: center;
@@ -1008,13 +1014,7 @@ background-color: #8A3536;
 
 
         .promo-container {
-            width: 100%;
-            max-width: 600px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top: 20px;
+            display: none;
         }
  
         .promo-toggle {
@@ -1360,7 +1360,7 @@ background-color: #8A3536;
         #shipping-details-expanded p,
         #shipping-details-expanded div {
             max-width: 100%;
-            word-wrap: break-word; /* Ensure content wraps within the container */
+            word-wrap: break-word;
         }
 
         #shipping-details-expanded.expanded {
@@ -1385,7 +1385,7 @@ background-color: #8A3536;
         @media (max-width: 768px) {
 
             #shipping-details-expanded {
-                max-height: 300px; /* Adjust as needed for smaller screens */
+                max-height: 300px; 
             }
 
             #shipping-details-expanded p {
@@ -1493,21 +1493,20 @@ background-color: #8A3536;
 
             <div id="shipping-options" style="display: none;">
                 <div class="radio-container">
-                    <label>
-                        <input type="radio" name="shipping-type" value="prepay" checked aria-label="Prepay and Add">
-                        Prepay & Add
+                    <label class="shipping-type-prepay">
+                        <input type="radio" name="shipping-type" value="prepay" checked aria-label="Prepay and Add" style="display: none;">
+                        
                     </label>
-                    <label>
+                    <label class="shipping-type-collect">
                         <input type="radio" name="shipping-type" value="collect" aria-label="Collect">
                         Collect
                     </label>
-                    <label>
+                    <label class="shipping-type-ltl">
                         <input type="radio" name="shipping-type" value="ltl" aria-label="LTL Collect">
                         LTL Collect
                     </label>
                 </div>
 
-                <div class="full-width-divider"></div>
 
                 <div id="prepay-options" class="shipping-detail">
                     <select id="ups-options" aria-label="Select UPS Shipping Service" required>
@@ -1516,6 +1515,8 @@ background-color: #8A3536;
                         <option value="Next-Day">Next Day Air</option>
                         <option value="Second-Day">2nd Day Air</option>
                     </select>
+
+                <div class="full-width-divider"></div>
 
                     <div class="shipping-instructions-notes">
                         <textarea id="prepay-order-notes" placeholder="Order Notes"></textarea>
@@ -2516,7 +2517,6 @@ function processShippingOptions() {
                 return;
             }
 
-            // Collect shipping details for Prepay & Add
             shippingDetails = {
                 shippingType: 'Prepay & Add',
                 shippingMethod: shippingMethod,
@@ -2539,7 +2539,6 @@ function processShippingOptions() {
                 return;
             }
 
-            // Collect shipping details for Collect
             shippingDetails = {
                 shippingType: 'Collect',
                 shippingMethod: shippingMethod,
@@ -2565,7 +2564,6 @@ function processShippingOptions() {
                 return;
             }
 
-            // Collect shipping details for LTL Collect
             shippingDetails = {
                 shippingType: 'LTL Collect',
                 courierName: courierName,
@@ -2690,7 +2688,6 @@ function fetchAddressSuggestions() {
                     const addressLabel = address.label || '';
                     item.priority = 0;
 
-                    // Prioritize based on house number match
                     if (houseNumber === queryNumberStr) {
                         item.priority += 3;
                     } else if (houseNumber.startsWith(queryNumberStr)) {
@@ -2898,7 +2895,7 @@ function applyPromoCode(promoInputId, summarySectionId) {
         const orderDetailsPage = document.getElementById('order-details-page');
         orderDetailsPage.style.display = 'block';
 
-        populateOrderDetails(); // Ensure this function is called here
+        populateOrderDetails(); 
 
         window.scrollTo(0, 0);
     }
@@ -2907,15 +2904,12 @@ function applyPromoCode(promoInputId, summarySectionId) {
         const orderDate = new Date().toLocaleDateString();
         document.getElementById('order-date').innerText = orderDate;
 
-        // Populate Billing Address
         const billingContentHTML = document.querySelector('.billing-address .billing-content').innerHTML;
         document.querySelector('#order-details-page .billing-address .billing-content').innerHTML = billingContentHTML;
 
-        // Populate Shipping Address
         const shippingContentHTML = document.querySelector('.shipping-address .shipping-content').innerHTML;
         document.querySelector('#order-details-page .shipping-address .shipping-content').innerHTML = shippingContentHTML;
 
-        // Populate Cart Items
         const cartItemsDiv = document.querySelector('.cart-items');
         const cartItemsContent = cartItemsDiv.innerHTML;
 
@@ -2933,7 +2927,6 @@ function applyPromoCode(promoInputId, summarySectionId) {
             el.removeAttribute('id');
         });
 
-        // Populate Order Summary
         const summaryDiv = document.querySelector('.order-summary');
         const summaryContent = summaryDiv.innerHTML;
         const orderSummaryDiv = document.querySelector('#order-details-page .order-summary');
@@ -2943,20 +2936,16 @@ function applyPromoCode(promoInputId, summarySectionId) {
             el.removeAttribute('id');
         });
 
-        // Populate Payment Details
         const paymentContentDiv = document.querySelector('#order-details-page .payment-details .payment-content');
 
-        // Retrieve values from both forms
         const poNumberPO = document.getElementById('purchase-order-number').value.trim();
         const orderedByPO = document.getElementById('ordered-by').value.trim();
 
         const poNumberCC = document.getElementById('credit-purchase-order-number').value.trim();
         const cardHolderName = document.getElementById('card-holder-name').value.trim();
 
-        // Initialize Payment Details HTML
         let paymentDetailsHTML = '';
 
-        // Check which form is active and append relevant details
         if (document.getElementById('purchase-order-form').style.display !== 'none') {
             paymentDetailsHTML += `
                 <p><strong>Payment Method:</strong> Purchase Order</p>
@@ -2974,7 +2963,6 @@ function applyPromoCode(promoInputId, summarySectionId) {
                 <p><strong>Card Number:</strong> **** **** **** ${lastFour}</p>
             `;
 
-            // Include Purchase Order Number if entered in Credit Card Form
             if (poNumberCC) {
                 paymentDetailsHTML += `
                     <p><strong>Purchase Order Number:</strong> ${poNumberCC}</p>
@@ -2990,7 +2978,6 @@ function applyPromoCode(promoInputId, summarySectionId) {
 
         paymentContentDiv.innerHTML = paymentDetailsHTML;
 
-        // Populate Shipping Details Summary
         const shippingSummaryCollapsed = document.getElementById('shipping-summary-collapsed');
         const shippingDetailsExpanded = document.getElementById('shipping-details-expanded');
 
