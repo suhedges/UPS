@@ -2686,8 +2686,6 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById(`tab-${tab === 'purchase-order' ? 'credit-card' : 'purchase-order'}`).classList.remove('active');
         });
     });
-
-
     document.getElementById('place-order-btn').addEventListener('click', function(event) {
         const termsCheckbox = document.getElementById('terms-checkbox');
         if (!termsCheckbox.checked) {
@@ -2695,15 +2693,16 @@ document.addEventListener("DOMContentLoaded", function () {
             event.preventDefault(); 
         } else {
             event.preventDefault();
+            if (selectedShippingMethod.startsWith('pickup-')) {
+                processPickupShippingOptions();
+            }
             showSpinner();
-
             setTimeout(() => {
                 hideSpinner();
                 showOrderConfirmation();
             }, 2000);
         }
     });
-
     function showSpinner() {
         document.getElementById('spinner-overlay').style.display = 'flex';
     }
@@ -2778,7 +2777,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 displayOrderNotesField(false);
             } else if (shippingMethod.startsWith('pickup-')) {
                 // Skip step 2 and go directly to step 3
-                processPickupShippingOptions();
                 step = 3;
                 updateStepIndicatorUI(step);
                 document.getElementById('initial-shipping-section').style.display = 'none';
@@ -3321,21 +3319,15 @@ function applyPromoCode(promoInputId, summarySectionId) {
         const summaryContent = summaryDiv.innerHTML;
         const orderSummaryDiv = document.querySelector('#order-details-page .order-summary');
         orderSummaryDiv.innerHTML = summaryContent;
-
         orderSummaryDiv.querySelectorAll('[id]').forEach(el => {
             el.removeAttribute('id');
         });
-
         const paymentContentDiv = document.querySelector('#order-details-page .payment-details .payment-content');
-
         const poNumberPO = document.getElementById('purchase-order-number').value.trim();
         const orderedByPO = document.getElementById('ordered-by').value.trim();
-
         const poNumberCC = document.getElementById('credit-purchase-order-number').value.trim();
         const cardHolderName = document.getElementById('card-holder-name').value.trim();
-
         let paymentDetailsHTML = '';
-
         if (document.getElementById('purchase-order-form').style.display !== 'none') {
             paymentDetailsHTML += `
                 <p><strong>Payment Method:</strong> Purchase Order</p>
@@ -3343,7 +3335,6 @@ function applyPromoCode(promoInputId, summarySectionId) {
                 <p><strong>Ordered By:</strong> ${orderedByPO}</p>
             `;
         }
-
         if (document.getElementById('credit-card-form').style.display !== 'none') {
             const cardNumber = document.getElementById('card-number').value.trim();
             const lastFour = cardNumber.slice(-4);
@@ -3365,12 +3356,9 @@ function applyPromoCode(promoInputId, summarySectionId) {
                 <p><strong>Payment Method:</strong> Not Specified</p>
             `;
         }
-
         paymentContentDiv.innerHTML = paymentDetailsHTML;
-
         const shippingSummaryCollapsed = document.getElementById('shipping-summary-collapsed');
         const shippingDetailsExpanded = document.getElementById('shipping-details-expanded');
-
         if (shippingDetails && shippingDetails.shippingType) {
             let partialInfo = '';
             let fullInfo = '';
@@ -3421,7 +3409,6 @@ function applyPromoCode(promoInputId, summarySectionId) {
         document.getElementById('expand-shipping-details-btn').addEventListener('click', function() {
             const expandedDiv = document.getElementById('shipping-details-expanded');
             const isExpanded = expandedDiv.classList.contains('expanded');
-            
             if (!isExpanded) {
                 expandedDiv.classList.add('expanded');
                 this.textContent = 'Collapse';
@@ -3433,20 +3420,16 @@ function applyPromoCode(promoInputId, summarySectionId) {
             }
         });
     }
-
-
     function printOrderDetails() {
         const containerDiv = document.querySelector('.container');
         const orderDetailsPage = document.getElementById('order-details-page');
         const originalDisplay = containerDiv.style.display;
-
         containerDiv.style.display = 'none';
         window.print();
         containerDiv.style.display = originalDisplay;
     }
 
 function continueShopping() {
-
     location.reload();
 }
 
