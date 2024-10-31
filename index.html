@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping Form</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         * {
             margin: 0;
@@ -578,8 +580,8 @@ textarea {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;  /* Control the width of the form area */
-    margin: 0 auto; /* Center the form */
+    width: 100%; 
+    margin: 0 auto; 
     padding: 20px;
 }
 
@@ -771,7 +773,7 @@ textarea {
 .modal {
     display: none; 
     position: fixed;
-    z-index: 100; /* Sit on top */
+    z-index: 100;
     left: 0;
     top: 0;
     width: 100%;
@@ -1474,6 +1476,14 @@ background-color: #8A3536;
             box-sizing: border-box;
         }
 
+        #pickup-order-notes-section {
+            text-align: center;
+            justify-content: center;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+
 
         #ltl-order-notes {
             height: 90px;
@@ -1763,16 +1773,16 @@ background-color: #8A3536;
                     <select id="shipping-method" aria-label="Select Shipping Method">
                         <option value="">-Select-</option>
                         <option value="ship-to-me">Ship to Me</option>
-                        <option value="pickup-evansville-in" disabled>Pickup Evansville, IN</option>
-                        <option value="pickup-bloomington-in" disabled>Pickup Bloomington, IN</option>
-                        <option value="pickup-dubois-il" disabled>Pickup Dubois, IL</option>
-                        <option value="pickup-henderson-ky" disabled>Pickup Henderson, KY</option>
-                        <option value="pickup-hopkinsville-ky" disabled>Pickup Hopkinsville, KY</option>
-                        <option value="pickup-indianapolis-in" disabled>Pickup Indianapolis, IN</option>
-                        <option value="pickup-jasper-in" disabled>Pickup Jasper, IN</option>
-                        <option value="pickup-madisonville-ky" disabled>Pickup Madisonville, KY</option>
-                        <option value="pickup-owensboro-ky" disabled>Pickup Owensboro, KY</option>
-                        <option value="pickup-vincennes-in" disabled>Pickup Vincennes, IN</option>
+                        <option value="pickup-evansville-in" >Pickup Evansville, IN</option>
+                        <option value="pickup-bloomington-in" >Pickup Bloomington, IN</option>
+                        <option value="pickup-dubois-il" >Pickup Dubois, IL</option>
+                        <option value="pickup-henderson-ky" >Pickup Henderson, KY</option>
+                        <option value="pickup-hopkinsville-ky" >Pickup Hopkinsville, KY</option>
+                        <option value="pickup-indianapolis-in" >Pickup Indianapolis, IN</option>
+                        <option value="pickup-jasper-in" >Pickup Jasper, IN</option>
+                        <option value="pickup-madisonville-ky" >Pickup Madisonville, KY</option>
+                        <option value="pickup-owensboro-ky" >Pickup Owensboro, KY</option>
+                        <option value="pickup-vincennes-in" >Pickup Vincennes, IN</option>
                     </select>
 
                     <div class="full-width-divider"></div>
@@ -1895,6 +1905,10 @@ background-color: #8A3536;
                 <input type="text" id="card-holder-name" placeholder="Card Holder Name *" required>
                 <input type="text" id="cvv" placeholder="CVV *" required>
                 <p>Note: Tax and Freight will be finalized at the time of shipping.</p>
+            </div>
+
+            <div id="pickup-order-notes-section" style="display: none;">
+                <textarea id="pickup-order-notes" placeholder="Order Notes"></textarea>
             </div>
 
             <div class="promo-container">
@@ -2034,7 +2048,7 @@ background-color: #8A3536;
             <div class="saved-addresses-list grid-3-columns">
                 <!-- Saved address dynamic insert -->
             </div>
-            <!-- Pagination Controls -->
+            <!-- Pagin Controls -->
             <div class="pagination" id="pagination-controls">
                 <!-- Pagin buttons dynamic insert -->
             </div>
@@ -2076,7 +2090,7 @@ background-color: #8A3536;
             <div class="payment-details border-box">
                 <h4>Payment Details</h4>
                 <div class="payment-content">
-                    <!-- Payment information populated via JavaScript -->
+                    <!-- Payment information populate -->
                 </div>
             </div>
 
@@ -2090,13 +2104,13 @@ background-color: #8A3536;
                 </div>
             </div>
         </div>
-        <!-- End of Order Info Section -->
+        <!-- End of Order Info -->
         
         <div class="address-section">
             <div class="billing-address">
                 <h4>Billing Address</h4>
                 <div class="billing-content">
-                    <!-- Fixed Billing Address -->
+                    <!-- Fixed Bill Address -->
                     <p><strong>DEBRA-KUEMPEL</strong></p>
                     <p>3976 SOUTHERN AVE</p>
                     <p>CINCINNATI, OH 45227</p>
@@ -2106,7 +2120,7 @@ background-color: #8A3536;
             <div class="shipping-address">
                 <h4>Shipping Address</h4>
                 <div class="shipping-content">
-                    <!-- Dynamic Shipping Address -->
+                    <!-- Dynamic Ship Add -->
                     <p><strong>DEBRA-KUEMPEL</strong></p>
                     <p>3976 SOUTHERN AVE</p>
                     <p>CINCINNATI, OH 45227</p>
@@ -2147,6 +2161,7 @@ let step = 1;
 let currentPage = 1;
 let currentPageMain = 1;
 let shippingDetails = {};
+let selectedShippingMethod = '';
 const addressesPerPage = 4;
 const addressesPerPageMain = 2;
 
@@ -2718,13 +2733,27 @@ document.addEventListener("DOMContentLoaded", function () {
             step--;
             updateStepIndicatorUI(step);
             document.getElementById('payment-section').style.display = 'none';
-            document.getElementById('shipping-options').style.display = 'block';
-            document.getElementById('single-continue-btn').style.display = 'block';
-            document.getElementById('place-order-btn').style.display = 'none';
+            if (selectedShippingMethod.startsWith('pickup-')) {
+                document.getElementById('initial-shipping-section').style.display = 'block';
+                displayOrderNotesField(false);
+                document.getElementById('single-continue-btn').style.display = 'block';
+                document.getElementById('place-order-btn').style.display = 'none';
+            } else {
+                document.getElementById('shipping-options').style.display = 'block';
+                document.getElementById('single-continue-btn').style.display = 'block';
+                document.getElementById('place-order-btn').style.display = 'none';
+                displayOrderNotesField(false);
+            }
         }
         updateBackButtonVisibility();
     });
 
+    function displayOrderNotesField(show) {
+        const orderNotesSection = document.getElementById('pickup-order-notes-section');
+        if (show) {
+            orderNotesSection.style.display = show ? 'block' : 'none';
+        }
+    }
 
     document.getElementById('single-continue-btn').addEventListener('click', function () {
         if (step === 1) {
@@ -2734,31 +2763,51 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
+            selectedShippingMethod = shippingMethod;
+
             if (shippingMethod === 'ship-to-me') {
+                // Proceed to step 2
                 step++;
                 updateStepIndicatorUI(step);
                 document.getElementById('initial-shipping-section').style.display = 'none';
                 document.getElementById('shipping-options').style.display = 'block';
                 updateBackButtonVisibility();
+                displayOrderNotesField(false);
+            } else if (shippingMethod.startsWith('pickup-')) {
+                // Skip step 2 and go directly to step 3
+                processPickupShippingOptions();
+                step = 3;
+                updateStepIndicatorUI(step);
+                document.getElementById('initial-shipping-section').style.display = 'none';
+                document.getElementById('shipping-options').style.display = 'none';
+                document.getElementById('payment-section').style.display = 'block';
+                displayOrderNotesField(true);
+                updateBackButtonVisibility();
+                document.getElementById('single-continue-btn').style.display = 'none';
+                document.getElementById('place-order-btn').style.display = 'block';
             } else {
-                alert('This option does not require additional shipping details. Proceeding to the next step.');
                 step++;
                 updateStepIndicatorUI(step);
                 document.getElementById('initial-shipping-section').style.display = 'none';
                 document.getElementById('shipping-options').style.display = 'block';
                 updateBackButtonVisibility();
+                displayOrderNotesField(false);
             }
         } else if (step === 2) {
             const shippingType = document.querySelector('input[name="shipping-type"]:checked').value;
             if (shippingType) {
                 processShippingOptions();
+                displayOrderNotesField(false);
                 step++;
                 updateStepIndicatorUI(step);
                 updateBackButtonVisibility();
+                document.getElementById('single-continue-btn').style.display = 'none';
+                document.getElementById('place-order-btn').style.display = 'block';
             } else {
                 alert('Please select a shipping option to continue.');
             }
         }
+
     });
 
     ['contact-number', 'courier-contact', 'new-phone'].forEach(id => {
@@ -2790,6 +2839,33 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+function processPickupShippingOptions() {
+    const shippingCostElement = document.getElementById('shipping-cost');
+    const taxElement = document.getElementById('tax-cost');  
+    const totalElement = document.getElementById('total-cost');  
+
+    const shippingMethodSelect = document.getElementById('shipping-method');
+    const selectedOption = shippingMethodSelect.options[shippingMethodSelect.selectedIndex];
+    const pickupLocationText = selectedOption.textContent;
+
+    const orderNotes = document.getElementById('pickup-order-notes').value.trim();
+
+    shippingDetails = {
+        shippingType: 'Pickup',
+        pickupLocation: pickupLocationText,
+        orderNotes: orderNotes
+    };
+
+    let shippingCost = '$0.00';
+    let tax = '$2.44';        
+    let total = '$43.16';      
+
+    shippingCostElement.innerText = shippingCost;
+    taxElement.innerText = tax;
+    totalElement.innerText = total;
+}
+
 
 
 
@@ -3296,7 +3372,14 @@ function applyPromoCode(promoInputId, summarySectionId) {
             let partialInfo = '';
             let fullInfo = '';
 
-            if (shippingDetails.shippingType === 'Prepay & Add') {
+            if (shippingDetails.shippingType === 'Pickup') {
+                partialInfo = `<strong>${shippingDetails.pickupLocation}</strong>`;
+                fullInfo = `
+                    <p><strong>Shipping Type:</strong> ${shippingDetails.shippingType}</p>
+                    <p><strong>Pickup Location:</strong> ${shippingDetails.pickupLocation}</p>
+                    ${shippingDetails.orderNotes ? `<p><strong>Order Notes:</strong> ${shippingDetails.orderNotes}</p>` : ''}
+                `;
+            } else if (shippingDetails.shippingType === 'Prepay & Add') {
                 partialInfo = `<strong>Shipping Method: ${shippingDetails.shippingMethod}</strong>`;
                 fullInfo = `
                     <p><strong>Shipping Type:</strong> ${shippingDetails.shippingType}</p>
